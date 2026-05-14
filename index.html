@@ -1148,14 +1148,16 @@ function jsPdfQuote(q){
 
  // ── Header: WHITE background + primary accent line (same style as app preview)
  doc.setFillColor(255,255,255);
- // Logo square with primary border
- doc.setDrawColor(...pColor);
- doc.setLineWidth(1);
- doc.roundedRect(10,8,16,16,2,2,'S');
+ // Monogram logo (initials) — emojis not supported in jsPDF
+ const companyName=c.name||'VE';
+ const words=companyName.trim().split(/\s+/);
+ const initials=(words.length>=2?words[0][0]+words[1][0]:companyName.slice(0,2)).toUpperCase();
+ doc.setFillColor(...pColor);
+ doc.roundedRect(10,8,16,16,2,2,'F');
+ doc.setTextColor(255,255,255);
  doc.setFont('helvetica','bold');
- doc.setTextColor(...pColor);
- doc.setFontSize(10);
- doc.text(t.icon&&t.icon!=='•••'?t.icon.slice(0,2):'',15,18);
+ doc.setFontSize(initials.length>1?9:11);
+ doc.text(initials,18,17.5,{align:'center'});
  // Company name
  doc.setTextColor(11,31,68);
  doc.setFontSize(17);
