@@ -122,7 +122,7 @@ textarea.field{min-height:88px;resize:vertical}
 .totalBox{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:12px;margin-top:16px;margin-bottom:4px}
 .totalLine{display:flex;justify-content:space-between;padding:6px 0;font-weight:900;border-bottom:1px solid #f0f4fb}
 .totalLine:last-child{border-bottom:none}
-.totalLine.ttc{background:var(--accent);color:#fff;margin:8px -12px -12px;padding:12px 14px;border-bottom-left-radius:18px;border-bottom-right-radius:18px;font-size:17px;border-bottom:none}
+.totalLine.ttc{background:var(--primary);color:#fff;margin:8px -12px -12px;padding:12px 14px;border-bottom-left-radius:18px;border-bottom-right-radius:18px;font-size:17px;border-bottom:none}
 
 /* PDF preview */
 .pdfPreview{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 8px 22px rgba(13,71,161,.08);font-size:12px}
@@ -159,6 +159,43 @@ textarea.field{min-height:88px;resize:vertical}
 @media(max-width:360px){.tradeGrid{grid-template-columns:repeat(2,1fr)}.brand{font-size:26px}.hero{padding:28px 16px 22px}.panel{margin:0 8px;margin-top:-10px}.content{padding-left:10px;padding-right:10px}}
 @media(min-width:760px){.onboarding{padding:20px}.panel{padding:24px 26px}.tradeGrid{grid-template-columns:repeat(4,1fr)}.optionalInputs{grid-template-columns:1fr 1fr}.optionalInputs .wide{grid-column:1/-1}.howSection{display:none}}
 @media(print){.topbar,.bottomNav,.noPrint{display:none!important}.app{box-shadow:none;max-width:none}.content{padding:0;background:#fff}.pdfPreview{border:0;box-shadow:none}}
+
+/* ── Ultra-premium Dashboard ── */
+.dashContent{padding:0;background:#f0f4fb;min-height:calc(100dvh - 60px);}
+.heroCard{background:linear-gradient(135deg,var(--primary) 0%,#061a42 100%);border-radius:0 0 32px 32px;padding:22px 20px 28px;color:#fff;position:relative;overflow:hidden;margin-bottom:-2px}
+.heroCard::before{content:'';position:absolute;right:-50px;top:-50px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none}
+.heroCard::after{content:'';position:absolute;right:20px;bottom:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
+.heroGreet{font-size:13px;opacity:.8;font-weight:600;margin:0 0 2px;letter-spacing:.04em;text-transform:uppercase}
+.heroName{font-size:24px;font-weight:950;margin:0 0 18px;letter-spacing:-.02em}
+.heroCA{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(8px)}
+.heroCALabel{font-size:11px;opacity:.75;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.heroCAValue{font-size:28px;font-weight:950;letter-spacing:-.03em;color:#fff}
+.heroCABadge{background:var(--accent);color:#07172e;border-radius:999px;padding:4px 10px;font-size:11px;font-weight:900}
+.statStrip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:20px 16px 0}
+.statChip{background:#fff;border-radius:16px;padding:14px 10px 12px;border:1px solid rgba(13,71,161,.08);box-shadow:0 2px 12px rgba(13,71,161,.07);text-align:center;transition:transform .15s}
+.statChip:active{transform:scale(.97)}
+.statChip .scNum{font-size:26px;font-weight:950;color:var(--primary);display:block;line-height:1}
+.statChip .scLabel{font-size:11px;color:var(--muted);font-weight:700;margin-top:5px;display:block}
+.statChip .scDot{width:6px;height:6px;border-radius:50%;margin:0 auto 6px;background:var(--muted)}
+.statChip.wait .scDot{background:#f57c00}
+.statChip.wait .scNum{color:#e65100}
+.statChip.ok .scDot{background:#2e7d32}
+.statChip.ok .scNum{color:#1b5e20}
+.statChip.paid .scDot{background:#1565c0}
+.statChip.paid .scNum{color:var(--primary)}
+.dashActions{padding:16px 16px 0;display:grid;gap:8px}
+.dashSection{padding:16px 16px 0}
+.dashSectionTitle{font-size:13px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin:0 0 10px;display:flex;justify-content:space-between;align-items:center}
+.dashSectionTitle a{font-size:12px;color:var(--primary);font-weight:800;text-decoration:none;cursor:pointer}
+.quoteCard{background:#fff;border-radius:16px;border:1px solid rgba(13,71,161,.08);padding:14px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;box-shadow:0 2px 8px rgba(13,71,161,.05);cursor:pointer;transition:transform .12s,box-shadow .12s}
+.quoteCard:active{transform:scale(.98);box-shadow:0 1px 4px rgba(13,71,161,.08)}
+.qcLeft{flex:1;min-width:0}
+.qcNum{font-size:14px;font-weight:900;color:var(--text);margin:0 0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qcSub{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qcRight{text-align:right;flex-shrink:0}
+.qcAmount{font-size:15px;font-weight:950;color:var(--text)}
+.emptyDash{background:#fff;border-radius:18px;padding:32px 20px;text-align:center;color:var(--muted);margin-top:4px}
+.emptyDash .emptyIcon{font-size:40px;margin-bottom:12px}
 </style>
 </head>
 <body>
@@ -172,7 +209,7 @@ textarea.field{min-height:88px;resize:vertical}
 ══════════════════════════════ */
 const LS='devisexpress_v4_state';
 const money=n=>Number(n||0).toLocaleString('fr-FR',{style:'currency',currency:'EUR'});
-const pdfMoney=n=>{const v=Number(n||0);return v.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}).replace(/ /g,' ')+' EUR'};
+const pdfMoney=n=>{const v=Number(n||0);return v.toFixed(2).replace('.',',')+' EUR'};
 const today=()=>new Date().toISOString().slice(0,10);
 const uid=()=>Math.random().toString(36).slice(2,9).toUpperCase();
 const esc=s=>String(s??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]));
@@ -182,18 +219,26 @@ function val(id){const el=document.getElementById(id);return el?el.value:''}
 /* ══════════════════════════════
    DATA
 ══════════════════════════════ */
+const colorThemes={
+ bleu:      {primary:'#0D47A1',accent:'#F57C00',name:'🔵 Bleu professionnel'},
+ marine:    {primary:'#0A2342',accent:'#F57C00',name:'🌊 Marine & orange'},
+ vert:      {primary:'#1B5E20',accent:'#FF8F00',name:'🟢 Vert entreprise'},
+ indigo:    {primary:'#283593',accent:'#00ACC1',name:'💙 Indigo & cyan'},
+ bordeaux:  {primary:'#6A1B4D',accent:'#F57C00',name:'🍷 Bordeaux & orange'},
+ teal:      {primary:'#00695C',accent:'#FFB300',name:'🩵 Teal & or'},
+};
 const trades={
- plombier:{label:'Plombier',icon:'🚰',subtitle:'Plomberie',primary:'#0D47A1',accent:'#F57C00'},
- electricien:{label:'Électricien',icon:'⚡',subtitle:'Électricité',primary:'#0D47A1',accent:'#F57C00'},
- peintre:{label:'Peintre',icon:'🖌️',subtitle:'Peinture',primary:'#6D28D9',accent:'#F57C00'},
- menuisier:{label:'Menuisier',icon:'🪵',subtitle:'Menuiserie',primary:'#795548',accent:'#F57C00'},
- macon:{label:'Maçon',icon:'🧱',subtitle:'Maçonnerie',primary:'#455A64',accent:'#F57C00'},
- carreleur:{label:'Carreleur',icon:'🏠',subtitle:'Carrelage',primary:'#00838F',accent:'#F57C00'},
- clim:{label:'Climatisation',icon:'❄️',subtitle:'Climatisation',primary:'#0277BD',accent:'#00ACC1'},
- paysagiste:{label:'Paysagiste',icon:'🌿',subtitle:'Paysagisme',primary:'#2E7D32',accent:'#F57C00'},
- nettoyage:{label:'Nettoyage',icon:'🧴',subtitle:'Nettoyage',primary:'#1565C0',accent:'#2E7D32'},
- web:{label:'Créa. web',icon:'💻',subtitle:'Service digital',primary:'#263238',accent:'#1565C0'},
- autre:{label:'Autre métier',icon:'🔧',subtitle:'Service pro',primary:'#0D47A1',accent:'#F57C00'}
+ plombier:   {label:'Plombier',icon:'🚰',subtitle:'Plomberie',      primary:'#0D47A1',accent:'#F57C00'},
+ electricien:{label:'Électricien',icon:'⚡',subtitle:'Électricité', primary:'#0D47A1',accent:'#F57C00'},
+ peintre:    {label:'Peintre',icon:'🖌️',subtitle:'Peinture',       primary:'#1A237E',accent:'#F57C00'},
+ menuisier:  {label:'Menuisier',icon:'🪵',subtitle:'Menuiserie',    primary:'#4E342E',accent:'#FF8F00'},
+ macon:      {label:'Maçon',icon:'🧱',subtitle:'Maçonnerie',        primary:'#1B5E20',accent:'#F57C00'},
+ carreleur:  {label:'Carreleur',icon:'🏠',subtitle:'Carrelage',     primary:'#006064',accent:'#FF8F00'},
+ clim:       {label:'Climatisation',icon:'❄️',subtitle:'Climatisation',primary:'#01579B',accent:'#00ACC1'},
+ paysagiste: {label:'Paysagiste',icon:'🌿',subtitle:'Paysagisme',   primary:'#1B5E20',accent:'#FF8F00'},
+ nettoyage:  {label:'Nettoyage',icon:'🧴',subtitle:'Nettoyage',     primary:'#0D47A1',accent:'#2E7D32'},
+ web:        {label:'Créa. web',icon:'💻',subtitle:'Service digital',primary:'#0A2342',accent:'#1565C0'},
+ autre:      {label:'Autre métier',icon:'🔧',subtitle:'Service pro', primary:'#0D47A1',accent:'#F57C00'}
 };
 const defaultServices={
  plombier:[['Dépose ancienne installation',1,'forfait',180,'DÉPOSE'],['Recherche de fuite',1,'forfait',120,'DIAGNOSTIC'],['Remplacement robinetterie',1,'u',95,'APPAREILLAGE'],['Pose évier / lavabo',1,'u',180,'POSE'],['Main d\'œuvre',1,'forfait',350,'MAIN D\'ŒUVRE']],
@@ -226,7 +271,14 @@ if(!state.quotes)state.quotes=[];
 function saveState(){localStorage.setItem(LS,JSON.stringify(state))}
 function loadState(){try{return JSON.parse(localStorage.getItem(LS)||'null')}catch(e){return null}}
 function theme(t){return trades[t||state.trade]||trades.autre}
-function applyTheme(){const t=theme();document.documentElement.style.setProperty('--primary',t.primary);document.documentElement.style.setProperty('--secondary',adjustColor(t.primary));document.documentElement.style.setProperty('--accent',t.accent)}
+function effectiveColors(){
+ if(state.settings&&state.settings.colorTheme&&colorThemes[state.settings.colorTheme]){
+  const ct=colorThemes[state.settings.colorTheme];
+  return {primary:ct.primary,accent:ct.accent};
+ }
+ return theme();
+}
+function applyTheme(){const c=effectiveColors();document.documentElement.style.setProperty('--primary',c.primary);document.documentElement.style.setProperty('--secondary',c.primary);document.documentElement.style.setProperty('--accent',c.accent)}
 function adjustColor(hex){return hex}
 
 /* ══════════════════════════════
@@ -319,38 +371,99 @@ function shell(title,body){root(`
 function nav(){return `<nav class="bottomNav noPrint">${[['home','🏠','Accueil'],['quote','➕','Devis'],['clients','👥','Clients'],['track','📊','Suivi'],['profile','👤','Profil']].map(x=>`<button data-tab="${x[0]}" class="navItem${state.activeTab===x[0]?' active':''}"><span>${x[1]}</span>${x[2]}</button>`).join('')}</nav>`}
 
 /* ══════════════════════════════
-   HOME
+   HOME — ultra-premium
 ══════════════════════════════ */
 function homePage(){
  const qs=state.quotes;
  const pending=qs.filter(q=>q.status==='En attente').length;
  const ok=qs.filter(q=>q.status==='Accepté').length;
  const paid=qs.filter(q=>q.status==='Payé').length;
- const ca=qs.filter(q=>['Accepté','Payé'].includes(q.status)).reduce((s,q)=>s+(q.totalTTC||0),0);
- shell('DevisExpress',`
-  <h1 class="pageTitle">Bonjour ${esc(state.company.firstName||'!')}${state.company.firstName?' 👋':''}</h1>
-  <p class="sub">Votre tableau de bord</p>
-  <div class="dashGrid">
-   <div class="stat blue">En attente<b>${pending}</b></div>
-   <div class="stat green">Acceptés<b>${ok}</b></div>
-   <div class="stat orange">Payés<b>${paid}</b></div>
-   <div class="stat purple">CA estimé<b style="font-size:18px">${money(ca)}</b></div>
-  </div>
-  <div class="toolbar">
-   <button class="btn" onclick="newQuote()">＋ Nouveau devis</button>
-   <button class="btn ghost" onclick="demoQuote()">Démo</button>
-  </div>
-  <h3>Activité récente</h3>
-  <div class="list">${qs.slice(-8).reverse().map(quoteItem).join('')||'<div class="empty">Aucun devis pour le moment.<br><br><button class="btn" onclick="newQuote()" style="max-width:200px">Créer mon premier devis</button></div>'}</div>
- `);
+ const caMonth=qs.filter(q=>['Accepté','Payé'].includes(q.status)&&q.date&&q.date.slice(0,7)===today().slice(0,7)).reduce((s,q)=>s+(q.totalTTC||0),0);
+ const caTotal=qs.filter(q=>['Accepté','Payé'].includes(q.status)).reduce((s,q)=>s+(q.totalTTC||0),0);
+ const recent=qs.slice(-6).reverse();
+ const dayNames=['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+ const monthNames=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+ const now=new Date();
+ const dateStr=dayNames[now.getDay()]+' '+now.getDate()+' '+monthNames[now.getMonth()]+' '+now.getFullYear();
+ const company=state.company.name||state.company.firstName||'';
+ const trade=theme().label;
+
+ // Custom shell without content padding for hero
+ document.getElementById('root').innerHTML=`
+  <div class="app">
+   <header class="topbar">
+    <button class="iconBtn" onclick="openQuickMenu()">☰</button>
+    <b>DevisExpress</b>
+    <button class="iconBtn" onclick="state.activeTab='profile';render()">⚙</button>
+   </header>
+   <main class="dashContent">
+    <div class="heroCard">
+     <p class="heroGreet">${dateStr}</p>
+     <h1 class="heroName">Bonjour ${esc(state.company.firstName||company||'!')} 👋</h1>
+     <div class="heroCA">
+      <div>
+       <div class="heroCALabel">CA ce mois</div>
+       <div class="heroCAValue">${money(caMonth)}</div>
+      </div>
+      <div style="text-align:right">
+       <div class="heroCABadge">CA total</div>
+       <div style="font-size:13px;opacity:.85;margin-top:4px;font-weight:700">${money(caTotal)}</div>
+      </div>
+     </div>
+    </div>
+    <div class="statStrip">
+     <div class="statChip wait">
+      <div class="scDot"></div>
+      <span class="scNum">${pending}</span>
+      <span class="scLabel">En attente</span>
+     </div>
+     <div class="statChip ok">
+      <div class="scDot"></div>
+      <span class="scNum">${ok}</span>
+      <span class="scLabel">Acceptés</span>
+     </div>
+     <div class="statChip paid">
+      <div class="scDot"></div>
+      <span class="scNum">${paid}</span>
+      <span class="scLabel">Payés</span>
+     </div>
+    </div>
+    <div class="dashActions">
+     <button class="btn" onclick="newQuote()" style="min-height:56px;font-size:16px;letter-spacing:-.01em">＋ Nouveau devis</button>
+     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button class="btn ghost small" onclick="state.activeTab='clients';render()">👥 Clients</button>
+      <button class="btn ghost small" onclick="demoQuote()">🎯 Démo</button>
+     </div>
+    </div>
+    <div class="dashSection">
+     <div class="dashSectionTitle">
+      <span>Activité récente</span>
+      <a onclick="state.activeTab='track';render()">Tout voir →</a>
+     </div>
+     ${recent.length?recent.map(quoteCard).join(''):`<div class="emptyDash"><div class="emptyIcon">🧾</div><p style="font-weight:700;margin:0 0 4px">Aucun devis pour le moment</p><p style="font-size:13px;margin:0 0 16px">Créez votre premier devis en 2 minutes</p><button class="btn" onclick="newQuote()" style="max-width:220px">Créer un devis</button></div>`}
+    </div>
+    <div style="height:24px"></div>
+   </main>
+   ${nav()}
+  </div>`;
+ bindCommon();
 }
-function quoteItem(q){
+function quoteCard(q){
  const badgeCls=q.status==='Accepté'?'ok':q.status==='Payé'?'paid':q.type==='facture'?'inv':q.status==='Brouillon'?'draft':'wait';
- return `<div class="item" onclick="openQuote('${q.id}')" style="cursor:pointer">
-  <div style="flex:1;min-width:0"><h4>${esc(q.number)}</h4><p>${esc(q.client?.name||'Client non renseigné')} · ${new Date(q.date).toLocaleDateString('fr-FR')}</p></div>
-  <div style="text-align:right;flex-shrink:0"><b>${money(q.totalTTC)}</b><br><span class="badge ${badgeCls}">${q.status}</span></div>
+ const badgeColors={ok:'#e8f8ee;color:#15803d',paid:'#e8f8ee;color:#15803d',inv:'#ffe8f0;color:#b5195a',draft:'#f0f0f0;color:#555',wait:'#fff5e7;color:#c05b00'};
+ const bc=badgeColors[badgeCls]||badgeColors.wait;
+ return `<div class="quoteCard" onclick="openQuote('${q.id}')">
+  <div class="qcLeft">
+   <div class="qcNum">${esc(q.number)} ${q.type==='facture'?'<span style="font-size:10px;background:#ffe8f0;color:#b5195a;padding:2px 6px;border-radius:999px;font-weight:900">FACTURE</span>':''}</div>
+   <div class="qcSub">${esc(q.client?.name||'Client non renseigné')} · ${new Date(q.date).toLocaleDateString('fr-FR')}</div>
+  </div>
+  <div class="qcRight">
+   <div class="qcAmount">${money(q.totalTTC)}</div>
+   <span style="display:inline-block;margin-top:4px;padding:3px 8px;border-radius:999px;font-size:10px;font-weight:900;background:${bc}">${q.status}</span>
+  </div>
  </div>`
 }
+function quoteItem(q){return quoteCard(q)}
 
 /* ══════════════════════════════
    DRAFT
@@ -577,8 +690,8 @@ function pdfPreviewHTML(onboard){
   ${d.title?`<b style="font-size:13px">${esc(d.title).toUpperCase()}</b>`:''}
   ${d.description?`<p style="margin:4px 0;color:#556;font-size:11px">${esc(d.description)}</p>`:''}
   ${items.length?`<table class="miniTable">
-   <thead><tr><th>DÉSIGNATION</th><th>QTÉ</th><th>TOTAL HT</th></tr></thead>
-   <tbody>${Object.entries(cats).map(([cat,arr])=>`<tr class="catRow"><td colspan="3">${esc(cat)}</td></tr>${arr.map(it=>`<tr><td>${esc(it.name)}</td><td style="text-align:right">${it.qty}</td><td style="text-align:right">${money(it.qty*it.price)}</td></tr>`).join('')}`).join('')}</tbody>
+   <thead><tr><th>DÉSIGNATION</th><th>QTÉ</th><th>PU HT</th><th>TOTAL HT</th></tr></thead>
+   <tbody>${Object.entries(cats).map(([cat,arr])=>`<tr class="catRow"><td colspan="4">${esc(cat)}</td></tr>${arr.map(it=>`<tr><td>${esc(it.name)}</td><td style="text-align:right">${it.qty}</td><td style="text-align:right">${money(it.price)}</td><td style="text-align:right">${money(it.qty*it.price)}</td></tr>`).join('')}`).join('')}</tbody>
   </table>
   ${totalsHTML({items})}
   <div class="mentionsPreview"><b>Mentions :</b> ${esc(mentions)}</div>
@@ -605,6 +718,22 @@ function createQuoteFromDraft(){
 window.finalizeQuote=()=>{
  const d=state.draft;
  if(!d.items.length){toast('⚠️ Ajoutez au moins une prestation');return}
+ if(d._editingId){
+  // Update existing quote
+  const idx=state.quotes.findIndex(x=>x.id===d._editingId);
+  if(idx>=0){
+   const t=totals(d);
+   const updated={...state.quotes[idx],...JSON.parse(JSON.stringify(d)),
+    totalHT:t.ht,totalTVA:t.tva,totalTTC:t.ttc,trade:state.trade};
+   delete updated._editingId;
+   state.quotes[idx]=updated;
+   state.draft=null;
+   saveState();
+   toast('✅ Devis mis à jour');
+   openQuote(updated.id);
+   return;
+  }
+ }
  const q=createQuoteFromDraft();
  successPage(q);
 };
@@ -635,26 +764,52 @@ window.openQuote=id=>{
  const isFacture=q.type==='facture';
  shell(q.number,`
   ${pdfDocHTML(q)}
-  <div class="toolbar noPrint" style="margin-top:12px">
+  <div class="toolbar noPrint" style="margin-top:12px;padding-bottom:2px;border-bottom:1px solid var(--line)">
    <button class="btn small" onclick="downloadPdf('${q.id}')">⬇ PDF</button>
    <button class="btn small ghost" onclick="shareQuote('${q.id}')">📤 Partager</button>
+   <button class="btn small ghost" onclick="editQuote('${q.id}')">✏️ Modifier</button>
   </div>
   <div class="toolbar noPrint">
    ${q.status!=='Accepté'&&q.status!=='Payé'&&!isFacture?`<button class="btn small ghost" onclick="markQuote('${q.id}','Accepté');openQuote('${q.id}')">✅ Accepté</button>`:''}
-   ${!isFacture?`<button class="btn small orange" onclick="confirmMakeInvoice('${q.id}')">📋 Générer facture</button>`:''}
-   ${q.status!=='Payé'?`<button class="btn small success" onclick="markQuote('${q.id}','Payé');openQuote('${q.id}')">💰 Marquer payé</button>`:'<span class="badge paid" style="padding:10px 14px">💰 PAYÉ</span>'}
+   ${!isFacture?`<button class="btn small orange" onclick="confirmMakeInvoice('${q.id}')">📋 Facture</button>`:''}
+   ${q.status!=='Payé'?`<button class="btn small success" onclick="markQuote('${q.id}','Payé');openQuote('${q.id}')">💰 Payé</button>`:'<span class="badge paid" style="padding:8px 10px">💰 PAYÉ</span>'}
   </div>
   <div class="toolbar noPrint">
    <button class="btn small ghost" onclick="emailQuote('${q.id}')">✉️ Email</button>
-   <button class="btn small danger" onclick="confirmDeleteQuote('${q.id}')">🗑 Supprimer</button>
+   <button class="btn small danger" onclick="confirmDeleteQuote('${q.id}')">🗑</button>
   </div>
  `);
 };
+window.editQuote=id=>{
+ const q=state.quotes.find(x=>x.id===id);
+ if(!q)return;
+ modalWithHeader('Modifier ce devis',`
+  <p>Vous allez éditer le devis <b>${esc(q.number)}</b>.<br>Toutes les modifications remplaceront la version actuelle.</p>
+  <div class="toolbar">
+   <button class="btn ghost" onclick="closeModal()">Annuler</button>
+   <button class="btn" onclick="closeModal();doEditQuote('${id}')">✏️ Modifier</button>
+  </div>
+ `);
+};
+window.doEditQuote=id=>{
+ const q=state.quotes.find(x=>x.id===id);
+ if(!q)return;
+ state.draft=JSON.parse(JSON.stringify(q));
+ state.draft.step=1;
+ state.draft._editingId=id;
+ if(q.trade)state.trade=q.trade;
+ state.activeTab='quote';
+ render();
+ toast('✏️ Modification en cours…');
+};
 function pdfDocHTML(q){
- const saved=state.draft;
+ const savedDraft=state.draft;
+ const savedTrade=state.trade;
  state.draft=q;
+ if(q.trade)state.trade=q.trade;
  const html=pdfPreviewHTML(false);
- state.draft=saved;
+ state.draft=savedDraft;
+ state.trade=savedTrade;
  return html;
 }
 window.confirmMakeInvoice=id=>{
@@ -817,6 +972,14 @@ function profilePage(){
   <div class="card" style="padding:15px">
    <div class="label">Métier principal</div>
    <select class="field" id="tradeSelect">${Object.entries(trades).map(([k,v])=>`<option value="${k}"${state.trade===k?' selected':''}>${v.icon} ${v.label}</option>`).join('')}</select>
+   <div id="customTradeRow" style="${state.trade==='autre'?'':'display:none;'}margin-top:9px">
+    <input class="field" id="customTradeLabel" placeholder="✏️ Nom de votre métier (affiché sur les devis)" value="${esc(trades.autre.label==='Autre métier'?'':trades.autre.label)}">
+   </div>
+   <div class="label" style="margin-top:14px">Couleur des devis</div>
+   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px">
+    ${Object.entries(colorThemes).map(([k,v])=>`<button onclick="setColorTheme('${k}')" style="border:3px solid ${(state.settings&&state.settings.colorTheme===k)?v.primary:'transparent'};border-radius:12px;padding:8px 6px;background:${v.primary};color:#fff;font-size:11px;font-weight:800;cursor:pointer;transition:all .15s">${v.name}</button>`).join('')}
+    <button onclick="setColorTheme('')" style="border:3px solid ${(!state.settings||!state.settings.colorTheme)?'#0D47A1':'transparent'};border-radius:12px;padding:8px 6px;background:#f0f4ff;color:#0D47A1;font-size:11px;font-weight:800;cursor:pointer">🔄 Couleur du métier</button>
+   </div>
    <div class="label">Entreprise</div>
    <input class="field prof" data-k="name" placeholder="🏢 Nom entreprise" value="${esc(c.name)}" style="margin-top:6px">
    <input class="field prof" data-k="firstName" placeholder="👤 Prénom" value="${esc(c.firstName)}" style="margin-top:9px">
@@ -840,14 +1003,34 @@ function profilePage(){
   </div>
   <div class="list">${state.servicesByTrade[state.trade].map(s=>`<div class="item"><div style="flex:1;min-width:0"><h4>${esc(s.name)}</h4><p>${esc(s.category)} · ${money(s.price)} / ${esc(s.unit)}</p></div><button class="btn small ghost" style="width:auto;padding:0 12px;flex-shrink:0" onclick="openServiceModalById('${s.id}')">✏️</button></div>`).join('')}</div>
  `);
- document.getElementById('tradeSelect').onchange=e=>{state.trade=e.target.value;saveState();render()};
+ document.getElementById('tradeSelect').onchange=e=>{
+  state.trade=e.target.value;
+  const row=document.getElementById('customTradeRow');
+  if(row)row.style.display=e.target.value==='autre'?'block':'none';
+  saveState();applyTheme();
+ };
  document.querySelectorAll('.prof').forEach(i=>i.oninput=e=>state.company[i.dataset.k]=e.target.value);
 }
+window.setColorTheme=k=>{
+ if(!state.settings)state.settings={};
+ state.settings.colorTheme=k;
+ saveState();applyTheme();
+ // Re-render just the color buttons
+ const btns=document.querySelectorAll('[onclick^="setColorTheme"]');
+ btns.forEach(b=>{
+  const bk=b.getAttribute('onclick').replace("setColorTheme('","").replace("')","");
+  if(bk==='' && k===''){b.style.border='3px solid #0D47A1';}
+  else if(bk===k){const ct=colorThemes[k];b.style.border='3px solid '+ct.primary;}
+  else{b.style.border='3px solid transparent';}
+ });
+};
 window.saveProfile=()=>{
  document.querySelectorAll('.prof').forEach(i=>state.company[i.dataset.k]=i.value);
  state.settings.vat=Number(val('vat'))||0;
  state.settings.validity=Number(val('validity'))||30;
  state.settings.mentions=val('mentions');
+ const customLabel=val('customTradeLabel');
+ if(state.trade==='autre'&&customLabel.trim()){trades.autre.label=customLabel.trim();trades.autre.subtitle=customLabel.trim();}
  saveState();toast('✅ Profil enregistré');render();
 };
 
@@ -959,43 +1142,60 @@ function jsPdfQuote(q){
  const doc=new jsPDF('p','mm','a4');
  const t=theme(q.trade);
  const c=state.company;
- const pColor=hexRgb(t.primary);
- const aColor=hexRgb(t.accent);
+ const ec=effectiveColors();
+ const pColor=hexRgb(ec.primary);
+ const aColor=hexRgb(ec.accent);
 
- // Header background
+ // ── Header: WHITE background + primary accent line (same style as app preview)
+ doc.setFillColor(255,255,255);
+ // Logo square with primary border
+ doc.setDrawColor(...pColor);
+ doc.setLineWidth(1);
+ doc.roundedRect(10,8,16,16,2,2,'S');
+ doc.setFont('helvetica','bold');
+ doc.setTextColor(...pColor);
+ doc.setFontSize(10);
+ doc.text(t.icon&&t.icon!=='•••'?t.icon.slice(0,2):'',15,18);
+ // Company name
+ doc.setTextColor(11,31,68);
+ doc.setFontSize(17);
+ doc.text(c.name||'VOTRE ENTREPRISE',30,15);
+ doc.setFont('helvetica','normal');
+ doc.setFontSize(9);
+ doc.setTextColor(...pColor);
+ doc.text(t.subtitle.toUpperCase(),30,21);
+ // Company details
+ const infos=[c.address,c.phone,c.email,c.siret?'SIRET : '+c.siret:'',c.insurance?'Assur. : '+c.insurance:''].filter(Boolean);
+ doc.setTextColor(80,95,115);
+ doc.setFontSize(8);
+ infos.forEach((l,i)=>doc.text(String(l),30,26+i*4));
+ // DEVIS / FACTURE badge
+ const badgeLabel=q.type==='facture'?'FACTURE':'DEVIS';
  doc.setFillColor(...pColor);
- doc.rect(0,0,210,36,'F');
+ doc.roundedRect(148,8,52,16,3,3,'F');
  doc.setTextColor(255,255,255);
  doc.setFont('helvetica','bold');
- doc.setFontSize(18);
- doc.text(c.name||'VOTRE ENTREPRISE',14,13);
- doc.setFontSize(10);
- doc.setFont('helvetica','normal');
- doc.text(t.subtitle.toUpperCase(),14,19);
- const infos=[c.address,c.phone,c.email,c.siret?'SIRET : '+c.siret:'',c.insurance?'Assur. : '+c.insurance:''].filter(Boolean);
- infos.forEach((l,i)=>doc.text(String(l),14,24+i*4));
+ doc.setFontSize(15);
+ doc.text(badgeLabel,174,18.5,{align:'center'});
+ // Blue accent line below header
+ const headerBottom=Math.max(30,28+infos.length*4);
+ doc.setFillColor(...pColor);
+ doc.rect(0,headerBottom,210,2,'F');
 
- // Doc type badge
- doc.setFillColor(...aColor);
- doc.roundedRect(148,8,52,18,3,3,'F');
- doc.setTextColor(10,20,40);
- doc.setFont('helvetica','bold');
- doc.setFontSize(16);
- doc.text(q.type==='facture'?'FACTURE':'DEVIS',174,19.5,{align:'center'});
-
- // Info block
- let y=42;
+ // Info block (right)
+ let y=headerBottom+8;
  doc.setTextColor(11,31,68);
  doc.setFillColor(242,246,255);
  doc.roundedRect(130,y,70,30,2,2,'F');
  doc.setFontSize(8.5);
- [['N° :',q.number],['Date :',new Date(q.date).toLocaleDateString('fr-FR')],['Validité :',q.validity+' jours'],['Client :',q.client?.name||'-'],['Tél. :',q.client?.phone||'-']].forEach(([k,v],i)=>{
+ [['N° :',q.number],['Date :',new Date(q.date).toLocaleDateString('fr-FR')],['Validité :',(q.validity||30)+' jours'],['Client :',q.client?.name||'-'],['Tél. :',q.client?.phone||'-']].forEach(([k,v],i)=>{
   doc.setFont('helvetica','bold');doc.text(k,133,y+6+i*4.8);
   doc.setFont('helvetica','normal');doc.text(String(v||'-').slice(0,28),148,y+6+i*4.8);
  });
 
- // Client block
+ // Client block (left)
  doc.setFont('helvetica','bold');doc.setFontSize(9);
+ doc.setTextColor(11,31,68);
  doc.text('CLIENT :',14,y+6);
  doc.setFont('helvetica','normal');
  doc.text(q.client?.name||'—',14,y+11);
@@ -1052,19 +1252,31 @@ function jsPdfQuote(q){
   });
  });
 
- // Totals
+ // Totals — refined, matches app style
  y+=4;
  [['TOTAL HT',q.totalHT,false],['TVA '+state.settings.vat+'%',q.totalTVA,false],['TOTAL TTC',q.totalTTC,true]].forEach(([label,amt,highlight])=>{
-  if(highlight){doc.setFillColor(...aColor)}else{doc.setFillColor(...pColor)}
-  doc.setTextColor(255,255,255);
-  doc.rect(130,y,40,9,'F');
-  doc.setFont('helvetica','bold');doc.setFontSize(9);
-  doc.text(label,132,y+6);
-  doc.setTextColor(11,31,68);
-  doc.setDrawColor(210,220,235);
-  doc.rect(170,y,30,9);
-  doc.text(pdfMoney(amt),197,y+6,{align:'right'});
-  y+=9;
+  if(highlight){
+   // TTC: full-width primary band like the app
+   doc.setFillColor(...pColor);
+   doc.roundedRect(10,y,190,11,2,2,'F');
+   doc.setTextColor(255,255,255);
+   doc.setFont('helvetica','bold');doc.setFontSize(11);
+   doc.text('TOTAL TTC',14,y+7.5);
+   doc.text(pdfMoney(amt),197,y+7.5,{align:'right'});
+   y+=11;
+  }else{
+   doc.setFillColor(...pColor);
+   doc.setTextColor(255,255,255);
+   doc.setFont('helvetica','bold');doc.setFontSize(8.5);
+   doc.rect(130,y,40,8,'F');
+   doc.text(label,132,y+5.5);
+   doc.setTextColor(11,31,68);
+   doc.setDrawColor(215,225,240);
+   doc.rect(170,y,30,8);
+   doc.setFont('helvetica','normal');
+   doc.text(pdfMoney(amt),197,y+5.5,{align:'right'});
+   y+=8;
+  }
  });
 
  // Observations + mentions
