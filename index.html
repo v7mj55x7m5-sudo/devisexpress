@@ -1,31 +1,163 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0D47A1" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="default" />
-<meta name="apple-mobile-web-app-title" content="DevisExpress" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#0D47A1"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="DevisExpress"/>
 <title>DevisExpress V4</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{
-  --primary:#0D47A1; --secondary:#1565C0; --accent:#F57C00; --success:#2E7D32;
-  --text:#0b1f44; --muted:#607D8B; --bg:#f5f7fa; --card:#ffffff; --line:#d9e2ef;
-  --soft:#eef5ff; --danger:#d32f2f; --shadow:0 18px 45px rgba(13,71,161,.14);
-  --radius:18px; --bottom:78px;
+  --primary:#0D47A1;--secondary:#1565C0;--accent:#F57C00;--success:#2E7D32;
+  --text:#0b1f44;--muted:#607D8B;--bg:#f5f7fa;--card:#ffffff;--line:#d9e2ef;
+  --soft:#eef5ff;--danger:#d32f2f;--shadow:0 18px 45px rgba(13,71,161,.14);
+  --radius:18px;--bottom:78px;
 }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent} html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text);background:radial-gradient(circle at top,#fff 0,#f3f7ff 42%,#eef3fb 100%)}
-body{overflow-x:hidden}.hidden{display:none!important}.app{max-width:480px;margin:0 auto;min-height:100dvh;background:#fff;position:relative;box-shadow:0 0 0 1px rgba(13,71,161,.08)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text);background:radial-gradient(circle at top,#fff 0,#f3f7ff 42%,#eef3fb 100%)}
+body{overflow-x:hidden}
+.hidden{display:none!important}
+.app{max-width:480px;margin:0 auto;min-height:100dvh;background:#fff;position:relative;box-shadow:0 0 0 1px rgba(13,71,161,.08)}
 @media(min-width:760px){.app{margin:20px auto;border-radius:28px;min-height:860px;overflow:hidden}}
-button,input,textarea,select{font:inherit}button{border:0;cursor:pointer}.btn{width:100%;min-height:52px;border-radius:14px;background:linear-gradient(135deg,var(--secondary),var(--primary));color:#fff;font-weight:800;box-shadow:0 10px 24px rgba(13,71,161,.22)}.btn.orange{background:linear-gradient(135deg,#ffa51a,var(--accent));color:#07172e}.btn.ghost{background:#fff;color:var(--primary);border:1px solid #b8cef2;box-shadow:none}.btn.danger{background:#fff;color:var(--danger);border:1px solid #ffc3c3;box-shadow:none}.btn.green{background:linear-gradient(135deg,#22c55e,#15803d);color:#fff}.btn.small{min-height:38px;border-radius:11px;font-size:13px}.pill{display:inline-flex;gap:6px;align-items:center;padding:8px 10px;border-radius:999px;background:#eef5ff;color:var(--primary);font-size:12px;font-weight:800}.field{width:100%;min-height:48px;border:1px solid var(--line);border-radius:13px;padding:12px 14px;background:#fff;color:var(--text);outline:none}.field:focus{border-color:var(--secondary);box-shadow:0 0 0 4px rgba(21,101,192,.08)}textarea.field{min-height:88px;resize:vertical}.label{font-size:12px;font-weight:900;color:var(--primary);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 7px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 25px rgba(13,71,161,.08)}
-/* onboarding */
-.onboarding{min-height:100dvh;padding-bottom:22px;background:#fff}.hero{background:linear-gradient(135deg,#062b67,#0D47A1 55%,#073270);color:#fff;padding:34px 24px 28px;border-bottom-left-radius:26px;border-bottom-right-radius:26px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;right:-30px;top:25px;width:135px;height:180px;background:rgba(255,255,255,.12);border-radius:28px;transform:rotate(11deg)}.logoRow{display:flex;gap:14px;align-items:center;position:relative;z-index:1}.appLogo{width:64px;height:64px;border-radius:17px;background:#fff;display:grid;place-items:center;box-shadow:0 12px 24px rgba(0,0,0,.18);font-size:34px}.brand{font-size:32px;font-weight:950;letter-spacing:-.04em}.brand span{color:var(--accent)}.tag{margin:6px 0 18px;color:#d7e7ff;line-height:1.45}.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;position:relative;z-index:1}.trust div{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);border-radius:13px;padding:9px;font-size:11px;font-weight:800}.panel{margin:-10px 14px 0;background:#fff;border-radius:24px;padding:20px 14px;position:relative;z-index:2;box-shadow:var(--shadow)}.sectionTitle{display:flex;gap:10px;align-items:center;margin:8px 0 4px;font-size:20px;font-weight:950}.sectionTitle .ico{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#e8f1ff;color:var(--primary)}.sub{margin:0 0 16px;color:var(--muted);font-size:14px;line-height:1.4}.tradeGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.tradeCard{min-height:108px;border:1px solid var(--line);border-radius:15px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-weight:900;position:relative}.tradeCard .emoji{font-size:31px}.tradeCard.active{border:2px solid var(--secondary);background:linear-gradient(180deg,#fff,#f0f6ff)}.tradeCard.active:after{content:"✓";position:absolute;right:-6px;bottom:-6px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--secondary);color:#fff;border:3px solid #fff;font-weight:950}.moreTrade{margin:14px 0;border:1px dashed #9db9e9;color:var(--primary);background:#fff;border-radius:13px;height:44px;font-weight:900}.infoBox{border:1px solid #b9d2ff;background:#f1f7ff;border-radius:13px;padding:12px 14px;margin:12px 0;color:var(--primary);font-size:13px}.footerLock{text-align:center;color:#7b8da6;font-size:12px;margin:12px 0}.optionalInputs{display:grid;gap:9px}.desktopOnly{display:none}@media(min-width:760px){.onboarding{padding:20px}.panel{padding:24px 26px}.tradeGrid{grid-template-columns:repeat(4,1fr)}.optionalInputs{grid-template-columns:1fr 1fr}.optionalInputs .wide{grid-column:1/-1}.desktopOnly{display:block}.hero{border-radius:24px}}
-/* app shell */
-.topbar{height:64px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;position:sticky;top:0;z-index:10}.topbar b{font-size:17px}.iconBtn{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.14);color:#fff;font-size:20px}.content{padding:16px 14px calc(var(--bottom) + 18px);min-height:calc(100dvh - 64px);background:#f6f8fc}.bottomNav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:480px;height:calc(66px + env(safe-area-inset-bottom));padding:7px 8px env(safe-area-inset-bottom);background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);z-index:20}.navItem{background:transparent;color:#789;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:800;border-radius:12px}.navItem.active{background:#edf5ff;color:var(--primary)}.navItem span{font-size:20px}.dashGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{padding:15px;color:#fff;border-radius:18px;min-height:96px;box-shadow:0 12px 24px rgba(0,0,0,.08)}.stat b{display:block;font-size:26px;margin-top:8px}.stat.blue{background:linear-gradient(135deg,#1565C0,#0D47A1)}.stat.green{background:linear-gradient(135deg,#22c55e,#15803d)}.stat.orange{background:linear-gradient(135deg,#fb923c,#f57c00)}.stat.purple{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}.list{display:grid;gap:10px}.item{padding:13px;border:1px solid var(--line);border-radius:15px;background:#fff;display:flex;justify-content:space-between;gap:10px;align-items:center}.item h4{margin:0 0 4px}.item p{margin:0;color:var(--muted);font-size:13px}.badge{padding:5px 9px;border-radius:999px;font-size:11px;font-weight:900;background:#eef5ff;color:var(--primary)}.badge.ok{background:#e8f8ee;color:#15803d}.badge.wait{background:#fff5e7;color:#c05b00}.badge.paid{background:#e8f8ee;color:#15803d}.pageTitle{font-size:26px;font-weight:950;margin:0 0 6px;letter-spacing:-.03em}.toolbar{display:flex;gap:8px;margin:12px 0}.toolbar .btn{flex:1}.stepper{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:10px 0 14px}.step{height:32px;border-radius:999px;background:#e9edf5;color:#789;display:grid;place-items:center;font-size:12px;font-weight:900}.step.active{background:var(--primary);color:#fff}.quoteStep{display:none}.quoteStep.active{display:block}.serviceRow{padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff;margin-bottom:9px}.serviceTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.serviceName{font-weight:950}.servicePrice{font-weight:950;color:var(--primary)}.qtyBox{display:flex;align-items:center;gap:8px;margin-top:10px}.qtyBtn{width:34px;height:34px;border-radius:10px;background:#eef5ff;color:var(--primary);font-size:20px;font-weight:950}.qtyVal{min-width:34px;text-align:center;font-weight:950}.inlineActions{display:flex;gap:6px;margin-top:10px}.inlineActions button{flex:1;height:34px;border-radius:10px;background:#f7f9fc;color:var(--primary);font-size:12px;font-weight:900;border:1px solid var(--line)}.totalBox{position:sticky;bottom:calc(var(--bottom) + 8px);background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:12px;margin-top:12px}.totalLine{display:flex;justify-content:space-between;padding:6px 0;font-weight:900}.totalLine.ttc{background:var(--accent);color:#fff;margin:8px -12px -12px;padding:12px;border-bottom-left-radius:18px;border-bottom-right-radius:18px;font-size:18px}.previewGrid{max-width:920px;margin:18px auto;display:grid;grid-template-columns:1fr 1fr;gap:18px}.howCard{padding:18px}.howSteps{display:grid;gap:8px}.howSteps div{background:#f6f9ff;border:1px solid var(--line);border-radius:12px;padding:10px;font-size:13px}.pdfPreview{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:0 8px 22px rgba(13,71,161,.08);font-size:12px}.pdfHead{display:flex;justify-content:space-between;border-bottom:3px solid var(--primary);padding-bottom:8px;margin-bottom:10px}.pdfLogo{width:48px;height:48px;border:2px solid var(--primary);border-radius:10px;display:grid;place-items:center;font-size:25px;color:var(--accent)}.pdfTitle{background:var(--primary);color:#fff;border-radius:8px;padding:8px 18px;font-size:18px;font-weight:950}.miniTable{width:100%;border-collapse:collapse;margin-top:10px}.miniTable th{background:var(--primary);color:#fff}.miniTable th,.miniTable td{border:1px solid #c9d5e6;padding:7px;text-align:left}.miniTable td:nth-child(n+2),.miniTable th:nth-child(n+2){text-align:right}.catRow td{background:#eef3f8!important;color:var(--primary);font-weight:950;text-align:left!important}.modal{position:fixed;inset:0;background:rgba(2,10,27,.45);z-index:80;display:grid;place-items:end center;padding:14px}.modalBox{width:100%;max-width:480px;background:#fff;border-radius:24px 24px 18px 18px;padding:18px;box-shadow:0 25px 60px rgba(0,0,0,.25)}.modalTitle{font-size:20px;font-weight:950;margin:0 0 12px}.empty{padding:26px 14px;text-align:center;color:var(--muted)}.photoBox{height:120px;border-radius:14px;border:1px dashed #afc1dc;background:#f8fbff;display:grid;place-items:center;color:#789;margin:10px 0}.successView{text-align:center;padding:30px 8px}.check{width:92px;height:92px;border-radius:50%;border:3px solid #20a34a;color:#20a34a;display:grid;place-items:center;font-size:48px;margin:12px auto}.hideSmall{}@media(max-width:760px){.desktopOnly{display:block}.previewGrid{grid-template-columns:1fr;margin:14px}.howCard{padding:14px}.howSteps{grid-template-columns:1fr}.pdfPreview .totalBox{position:static!important;bottom:auto!important;box-shadow:none;margin-top:10px}.pdfPreview .totalLine.ttc{font-size:15px}.pdfHead{gap:8px}.pdfTitle{padding:7px 12px;font-size:15px}}
-@media(max-width:360px){.tradeGrid{grid-template-columns:repeat(2,1fr)}.hideSmall{display:none}.brand{font-size:27px}.hero{padding-left:18px;padding-right:18px}.panel{margin-left:8px;margin-right:8px}.content{padding-left:10px;padding-right:10px}}
-.pdfPreview .totalBox{position:static;bottom:auto;box-shadow:none;margin-top:10px}
+button,input,textarea,select{font:inherit}
+button{border:0;cursor:pointer}
+.btn{width:100%;min-height:52px;border-radius:14px;background:linear-gradient(135deg,var(--secondary),var(--primary));color:#fff;font-weight:800;box-shadow:0 10px 24px rgba(13,71,161,.22);display:inline-flex;align-items:center;justify-content:center;padding:0 16px}
+.btn.orange{background:linear-gradient(135deg,#ffa51a,var(--accent));color:#07172e}
+.btn.ghost{background:#fff;color:var(--primary);border:1px solid #b8cef2;box-shadow:none}
+.btn.danger{background:#fff;color:var(--danger);border:1px solid #ffc3c3;box-shadow:none}
+.btn.small{min-height:36px;border-radius:11px;font-size:13px}
+.btn.success{background:linear-gradient(135deg,#22c55e,#15803d);color:#fff}
+.field{width:100%;min-height:48px;border:1px solid var(--line);border-radius:13px;padding:12px 14px;background:#fff;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s}
+.field:focus{border-color:var(--secondary);box-shadow:0 0 0 4px rgba(21,101,192,.08)}
+textarea.field{min-height:88px;resize:vertical}
+.label{font-size:12px;font-weight:900;color:var(--primary);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 7px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 25px rgba(13,71,161,.08)}
+
+/* ── Onboarding ── */
+.onboarding{min-height:100dvh;padding-bottom:32px;background:#fff}
+.hero{background:linear-gradient(135deg,#062b67,#0D47A1 55%,#073270);color:#fff;padding:34px 24px 28px;border-bottom-left-radius:26px;border-bottom-right-radius:26px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-30px;top:25px;width:135px;height:180px;background:rgba(255,255,255,.12);border-radius:28px;transform:rotate(11deg)}
+.logoRow{display:flex;gap:14px;align-items:center;position:relative;z-index:1}
+.appLogo{width:64px;height:64px;border-radius:17px;background:#fff;display:grid;place-items:center;box-shadow:0 12px 24px rgba(0,0,0,.18);font-size:34px;flex-shrink:0}
+.brand{font-size:32px;font-weight:950;letter-spacing:-.04em}
+.brand span{color:var(--accent)}
+.tag{margin:6px 0 18px;color:#d7e7ff;line-height:1.45}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;position:relative;z-index:1}
+.trust div{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);border-radius:13px;padding:9px;font-size:11px;font-weight:800;text-align:center}
+.panel{margin:0 14px;margin-top:-10px;background:#fff;border-radius:24px;padding:20px 14px;position:relative;z-index:2;box-shadow:var(--shadow)}
+.sectionTitle{display:flex;gap:10px;align-items:center;margin:8px 0 4px;font-size:18px;font-weight:950}
+.sectionTitle .ico{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#e8f1ff;color:var(--primary);flex-shrink:0}
+.sub{margin:0 0 16px;color:var(--muted);font-size:14px;line-height:1.4}
+.tradeGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tradeCard{min-height:100px;border:1.5px solid var(--line);border-radius:15px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-weight:900;font-size:12px;position:relative;padding:8px 4px;transition:all .15s;text-align:center}
+.tradeCard:active{transform:scale(.96)}
+.tradeCard .emoji{font-size:28px}
+.tradeCard.active{border:2px solid var(--secondary);background:linear-gradient(180deg,#fff,#f0f6ff)}
+.tradeCard.active:after{content:"✓";position:absolute;right:-6px;bottom:-6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--secondary);color:#fff;border:2px solid #fff;font-weight:950;font-size:11px}
+.moreTrade{margin:14px 0;border:1.5px dashed #9db9e9;color:var(--primary);background:#fff;border-radius:13px;height:44px;font-weight:900;width:100%}
+.infoBox{border:1px solid #b9d2ff;background:#f1f7ff;border-radius:13px;padding:12px 14px;margin:12px 0;color:var(--primary);font-size:13px}
+.footerLock{text-align:center;color:#7b8da6;font-size:12px;margin:12px 0}
+.optionalInputs{display:grid;gap:9px}
+
+/* How it works - mobile compact */
+.howSection{margin:18px 14px 0;padding:16px;background:#fff;border-radius:18px;border:1px solid var(--line);box-shadow:0 4px 16px rgba(13,71,161,.06)}
+.howSection h3{font-size:16px;font-weight:950;margin:0 0 12px;color:var(--primary)}
+.howSteps{display:grid;gap:8px}
+.howStep{display:flex;gap:10px;align-items:center;padding:10px;border-radius:12px;background:#f8fbff}
+.howNum{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;font-size:12px;font-weight:900;display:grid;place-items:center;flex-shrink:0}
+
+/* ── App shell ── */
+.topbar{height:60px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;position:sticky;top:0;z-index:10}
+.topbar b{font-size:16px;font-weight:900}
+.iconBtn{width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.14);color:#fff;font-size:18px;display:grid;place-items:center}
+.content{padding:14px 14px calc(var(--bottom) + 22px);min-height:calc(100dvh - 60px);background:#f6f8fc}
+.bottomNav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:480px;height:calc(64px + env(safe-area-inset-bottom));padding:6px 8px env(safe-area-inset-bottom);background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);z-index:20}
+.navItem{background:transparent;color:#789;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10px;font-weight:800;border-radius:11px}
+.navItem.active{background:#edf5ff;color:var(--primary)}
+.navItem span{font-size:19px}
+
+/* ── Dashboard ── */
+.dashGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{padding:14px;color:#fff;border-radius:16px;min-height:88px;box-shadow:0 10px 20px rgba(0,0,0,.1)}
+.stat b{display:block;font-size:24px;margin-top:6px}
+.stat.blue{background:linear-gradient(135deg,#1565C0,#0D47A1)}
+.stat.green{background:linear-gradient(135deg,#22c55e,#15803d)}
+.stat.orange{background:linear-gradient(135deg,#fb923c,#f57c00)}
+.stat.purple{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+.list{display:grid;gap:10px}
+.item{padding:13px;border:1px solid var(--line);border-radius:15px;background:#fff;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.item h4{margin:0 0 3px;font-size:14px}
+.item p{margin:0;color:var(--muted);font-size:12px}
+.badge{padding:4px 9px;border-radius:999px;font-size:11px;font-weight:900;background:#eef5ff;color:var(--primary);white-space:nowrap}
+.badge.ok{background:#e8f8ee;color:#15803d}
+.badge.wait{background:#fff5e7;color:#c05b00}
+.badge.paid{background:#e8f8ee;color:#15803d}
+.badge.inv{background:#ffe8f0;color:#b5195a}
+.badge.draft{background:#f0f0f0;color:#555}
+
+/* ── Quote builder ── */
+.pageTitle{font-size:24px;font-weight:950;margin:0 0 4px;letter-spacing:-.03em}
+.toolbar{display:flex;gap:8px;margin:12px 0}
+.toolbar .btn{flex:1}
+.stepper{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0 14px}
+.step{height:30px;border-radius:999px;background:#e9edf5;color:#789;display:grid;place-items:center;font-size:12px;font-weight:900;transition:all .2s}
+.step.active{background:var(--primary);color:#fff}
+.step.done{background:#e8f8ee;color:#15803d}
+.serviceRow{padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff;margin-bottom:9px}
+.serviceTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.serviceName{font-weight:950;font-size:14px}
+.servicePrice{font-weight:950;color:var(--primary);white-space:nowrap}
+.qtyBox{display:flex;align-items:center;gap:8px;margin-top:8px}
+.qtyBtn{width:32px;height:32px;border-radius:9px;background:#eef5ff;color:var(--primary);font-size:18px;font-weight:950;display:grid;place-items:center}
+.qtyVal{min-width:32px;text-align:center;font-weight:950;font-size:15px}
+.inlineActions{display:flex;gap:6px;margin-top:8px}
+.inlineActions button{flex:1;height:32px;border-radius:9px;background:#f7f9fc;color:var(--primary);font-size:12px;font-weight:800;border:1px solid var(--line)}
+.inlineActions button.red{color:var(--danger);border-color:#ffc3c3}
+
+/* Totals - NO sticky, natural flow */
+.totalBox{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:12px;margin-top:16px;margin-bottom:4px}
+.totalLine{display:flex;justify-content:space-between;padding:6px 0;font-weight:900;border-bottom:1px solid #f0f4fb}
+.totalLine:last-child{border-bottom:none}
+.totalLine.ttc{background:var(--accent);color:#fff;margin:8px -12px -12px;padding:12px 14px;border-bottom-left-radius:18px;border-bottom-right-radius:18px;font-size:17px;border-bottom:none}
+
+/* PDF preview */
+.pdfPreview{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 8px 22px rgba(13,71,161,.08);font-size:12px}
+.pdfHead{display:flex;justify-content:space-between;border-bottom:2px solid var(--primary);padding-bottom:8px;margin-bottom:10px;gap:8px}
+.pdfLogo{width:44px;height:44px;border:2px solid var(--primary);border-radius:10px;display:grid;place-items:center;font-size:22px;color:var(--accent);flex-shrink:0}
+.pdfTitle{background:var(--primary);color:#fff;border-radius:8px;padding:6px 14px;font-size:16px;font-weight:950;white-space:nowrap;align-self:flex-start}
+.miniTable{width:100%;border-collapse:collapse;margin:10px 0 6px}
+.miniTable th{background:var(--primary);color:#fff}
+.miniTable th,.miniTable td{border:1px solid #c9d5e6;padding:6px 7px;text-align:left;font-size:11px}
+.miniTable td:nth-child(n+2),.miniTable th:nth-child(n+2){text-align:right}
+.catRow td{background:#eef3f8!important;color:var(--primary);font-weight:950;text-align:left!important}
+.mentionsPreview{background:#f8fbff;border:1px solid #d0e0f8;border-radius:10px;padding:8px;margin-top:8px;font-size:10px;color:#445;line-height:1.4}
+
+/* ── Modals ── */
+.modal{position:fixed;inset:0;background:rgba(2,10,27,.5);z-index:80;display:flex;align-items:flex-end;justify-content:center;padding:14px;animation:fadeIn .18s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modalBox{width:100%;max-width:480px;background:#fff;border-radius:24px 24px 18px 18px;padding:20px 18px 18px;box-shadow:0 25px 60px rgba(0,0,0,.25);max-height:88dvh;overflow-y:auto;animation:slideUp .22s cubic-bezier(.4,0,.2,1)}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modalHeader{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.modalTitle{font-size:19px;font-weight:950;margin:0}
+.modalClose{width:32px;height:32px;border-radius:50%;background:#f2f4f8;color:#556;font-size:16px;display:grid;place-items:center;flex-shrink:0}
+
+/* Misc */
+.empty{padding:24px 14px;text-align:center;color:var(--muted);font-size:14px}
+.successView{text-align:center;padding:30px 8px}
+.check{width:88px;height:88px;border-radius:50%;border:3px solid #20a34a;color:#20a34a;display:grid;place-items:center;font-size:46px;margin:12px auto}
+.filterRow{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.filterChip{padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:12px;font-weight:800;color:var(--muted);cursor:pointer;transition:all .15s}
+.filterChip.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.clientDetail{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.clientDetailRow{padding:11px 13px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.clientDetailRow:last-child{border-bottom:none}
+
+@media(max-width:360px){.tradeGrid{grid-template-columns:repeat(2,1fr)}.brand{font-size:26px}.hero{padding:28px 16px 22px}.panel{margin:0 8px;margin-top:-10px}.content{padding-left:10px;padding-right:10px}}
+@media(min-width:760px){.onboarding{padding:20px}.panel{padding:24px 26px}.tradeGrid{grid-template-columns:repeat(4,1fr)}.optionalInputs{grid-template-columns:1fr 1fr}.optionalInputs .wide{grid-column:1/-1}.howSection{display:none}}
 @media(print){.topbar,.bottomNav,.noPrint{display:none!important}.app{box-shadow:none;max-width:none}.content{padding:0;background:#fff}.pdfPreview{border:0;box-shadow:none}}
 </style>
 </head>
@@ -34,122 +166,1028 @@ button,input,textarea,select{font:inherit}button{border:0;cursor:pointer}.btn{wi
 <script>
 (function(){
 'use strict';
+
+/* ══════════════════════════════
+   UTILS
+══════════════════════════════ */
 const LS='devisexpress_v4_state';
 const money=n=>Number(n||0).toLocaleString('fr-FR',{style:'currency',currency:'EUR'});
+const pdfMoney=n=>{const v=Number(n||0);return v.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}).replace(/ /g,' ')+' EUR'};
 const today=()=>new Date().toISOString().slice(0,10);
 const uid=()=>Math.random().toString(36).slice(2,9).toUpperCase();
 const esc=s=>String(s??'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]));
+function setPath(o,path,val){const p=path.split('.');let x=o;while(p.length>1){if(x[p[0]]===undefined)x[p[0]]={};x=x[p.shift()]}x[p[0]]=val}
+function val(id){const el=document.getElementById(id);return el?el.value:''}
+
+/* ══════════════════════════════
+   DATA
+══════════════════════════════ */
 const trades={
- plombier:{label:'Plombier',icon:'🚰',subtitle:'Plomberie',primary:'#0D47A1',accent:'#F57C00',hero:'Remise en conformité plomberie'},
- electricien:{label:'Électricien',icon:'⚡',subtitle:'Électricité générale',primary:'#0D47A1',accent:'#F57C00',hero:'Remise en conformité électrique'},
- peintre:{label:'Peintre',icon:'🖌️',subtitle:'Peinture',primary:'#6D28D9',accent:'#F57C00',hero:'Travaux de peinture'},
- menuisier:{label:'Menuisier',icon:'🪵',subtitle:'Menuiserie',primary:'#795548',accent:'#F57C00',hero:'Travaux de menuiserie'},
- macon:{label:'Maçon',icon:'🧱',subtitle:'Maçonnerie',primary:'#455A64',accent:'#F57C00',hero:'Travaux de maçonnerie'},
- carreleur:{label:'Carreleur',icon:'🏠',subtitle:'Carrelage',primary:'#00838F',accent:'#F57C00',hero:'Pose de carrelage'},
- clim:{label:'Climatisation',icon:'❄️',subtitle:'Climatisation',primary:'#0277BD',accent:'#00ACC1',hero:'Installation climatisation'},
- paysagiste:{label:'Paysagiste',icon:'🌿',subtitle:'Paysagisme',primary:'#2E7D32',accent:'#F57C00',hero:'Entretien paysager'},
- nettoyage:{label:'Nettoyage',icon:'🧴',subtitle:'Nettoyage',primary:'#1565C0',accent:'#2E7D32',hero:'Prestation de nettoyage'},
- web:{label:'Création site web',icon:'💻',subtitle:'Service digital',primary:'#263238',accent:'#1565C0',hero:'Création site web'},
- autre:{label:'Autre métier',icon:'•••',subtitle:'Service professionnel',primary:'#0D47A1',accent:'#F57C00',hero:'Prestation professionnelle'}
+ plombier:{label:'Plombier',icon:'🚰',subtitle:'Plomberie',primary:'#0D47A1',accent:'#F57C00'},
+ electricien:{label:'Électricien',icon:'⚡',subtitle:'Électricité',primary:'#0D47A1',accent:'#F57C00'},
+ peintre:{label:'Peintre',icon:'🖌️',subtitle:'Peinture',primary:'#6D28D9',accent:'#F57C00'},
+ menuisier:{label:'Menuisier',icon:'🪵',subtitle:'Menuiserie',primary:'#795548',accent:'#F57C00'},
+ macon:{label:'Maçon',icon:'🧱',subtitle:'Maçonnerie',primary:'#455A64',accent:'#F57C00'},
+ carreleur:{label:'Carreleur',icon:'🏠',subtitle:'Carrelage',primary:'#00838F',accent:'#F57C00'},
+ clim:{label:'Climatisation',icon:'❄️',subtitle:'Climatisation',primary:'#0277BD',accent:'#00ACC1'},
+ paysagiste:{label:'Paysagiste',icon:'🌿',subtitle:'Paysagisme',primary:'#2E7D32',accent:'#F57C00'},
+ nettoyage:{label:'Nettoyage',icon:'🧴',subtitle:'Nettoyage',primary:'#1565C0',accent:'#2E7D32'},
+ web:{label:'Créa. web',icon:'💻',subtitle:'Service digital',primary:'#263238',accent:'#1565C0'},
+ autre:{label:'Autre métier',icon:'🔧',subtitle:'Service pro',primary:'#0D47A1',accent:'#F57C00'}
 };
-const defaults={
- plombier:[['Dépose ancienne installation',1,'forfait',180,'DÉPOSE'],['Recherche de fuite',1,'forfait',120,'DIAGNOSTIC'],['Remplacement robinetterie',1,'u',95,'APPAREILLAGE'],['Pose évier / lavabo',1,'u',180,'POSE'],['Main d’œuvre',1,'forfait',350,'MAIN D’ŒUVRE']],
- electricien:[['Dépose ancienne installation électrique',1,'forfait',350,'DÉPOSE'],['Fourniture et pose tableau électrique 2 rangées',1,'u',280,'TABLEAU ÉLECTRIQUE'],['Interrupteurs différentiels 30mA',2,'u',65,'TABLEAU ÉLECTRIQUE'],['Disjoncteurs divisionnaires',10,'u',18,'TABLEAU ÉLECTRIQUE'],['Prises 2P+T',22,'u',8,'APPAREILLAGE'],['Interrupteurs simples / va-et-vient',7,'u',10,'APPAREILLAGE'],['Points lumineux / DCL',6,'u',18,'APPAREILLAGE'],['Fourniture câblage complet',1,'lot',420,'PASSAGE RÉSEAUX'],['Main d’œuvre installation complète',1,'forfait',2150,'MAIN D’ŒUVRE']],
- peintre:[['Protection des sols',1,'forfait',90,'PRÉPARATION'],['Préparation des supports',40,'m²',8,'PRÉPARATION'],['Application sous-couche',40,'m²',6,'PEINTURE'],['Peinture murs deux couches',40,'m²',16,'PEINTURE'],['Main d’œuvre',1,'forfait',450,'MAIN D’ŒUVRE']],
+const defaultServices={
+ plombier:[['Dépose ancienne installation',1,'forfait',180,'DÉPOSE'],['Recherche de fuite',1,'forfait',120,'DIAGNOSTIC'],['Remplacement robinetterie',1,'u',95,'APPAREILLAGE'],['Pose évier / lavabo',1,'u',180,'POSE'],['Main d\'œuvre',1,'forfait',350,'MAIN D\'ŒUVRE']],
+ electricien:[['Dépose ancienne installation électrique',1,'forfait',350,'DÉPOSE'],['Fourniture tableau électrique 2 rangées',1,'u',280,'TABLEAU ÉLECTRIQUE'],['Interrupteurs différentiels 30mA',2,'u',65,'TABLEAU ÉLECTRIQUE'],['Disjoncteurs divisionnaires',10,'u',18,'TABLEAU ÉLECTRIQUE'],['Prises 2P+T',22,'u',8,'APPAREILLAGE'],['Interrupteurs simples',7,'u',10,'APPAREILLAGE'],['Points lumineux / DCL',6,'u',18,'APPAREILLAGE'],['Fourniture câblage complet',1,'lot',420,'PASSAGE RÉSEAUX'],['Main d\'œuvre installation complète',1,'forfait',2150,'MAIN D\'ŒUVRE']],
+ peintre:[['Protection des sols',1,'forfait',90,'PRÉPARATION'],['Préparation des supports',40,'m²',8,'PRÉPARATION'],['Application sous-couche',40,'m²',6,'PEINTURE'],['Peinture murs deux couches',40,'m²',16,'PEINTURE'],['Main d\'œuvre',1,'forfait',450,'MAIN D\'ŒUVRE']],
+ menuisier:[['Dépose ancien élément',1,'forfait',120,'DÉPOSE'],['Fourniture menuiserie',1,'u',650,'FOURNITURE'],['Pose et calage',1,'forfait',280,'POSE'],['Finitions et silicone',1,'forfait',90,'FINITIONS']],
  macon:[['Préparation chantier',1,'forfait',150,'PRÉPARATION'],['Montage mur / reprise',1,'forfait',650,'MAÇONNERIE'],['Enduit finition',20,'m²',28,'FINITION'],['Évacuation gravats',1,'forfait',180,'NETTOYAGE']],
- autre:[['Prestation personnalisée',1,'forfait',250,'PRESTATION'],['Main d’œuvre',1,'forfait',300,'MAIN D’ŒUVRE']]
+ carreleur:[['Dépose ancien carrelage',20,'m²',12,'DÉPOSE'],['Ragréage sol',20,'m²',8,'PRÉPARATION'],['Pose carrelage',20,'m²',35,'POSE'],['Joints et finitions',20,'m²',5,'FINITIONS']],
+ clim:[['Unité intérieure split',1,'u',450,'FOURNITURE'],['Unité extérieure',1,'u',380,'FOURNITURE'],['Liaison frigorifique',1,'forfait',220,'INSTALLATION'],['Mise en service',1,'forfait',180,'MISE EN SERVICE']],
+ paysagiste:[['Tonte pelouse',1,'forfait',80,'ENTRETIEN'],['Taille haies',1,'forfait',120,'ENTRETIEN'],['Évacuation déchets verts',1,'forfait',90,'NETTOYAGE']],
+ nettoyage:[['Nettoyage après chantier',80,'m²',4,'NETTOYAGE'],['Traitement sol',80,'m²',3,'TRAITEMENT'],['Évacuation déchets',1,'forfait',120,'ÉVACUATION']],
+ web:[['Conception maquette',1,'forfait',800,'CONCEPTION'],['Développement site vitrine',1,'forfait',2200,'DÉVELOPPEMENT'],['Intégration contenu',1,'forfait',400,'CONTENU'],['Formation administration',1,'h',90,'FORMATION'],['Maintenance 1 an',1,'forfait',600,'MAINTENANCE']],
+ autre:[['Prestation personnalisée',1,'forfait',250,'PRESTATION'],['Main d\'œuvre',1,'forfait',300,'MAIN D\'ŒUVRE']]
 };
-function catalogue(trade){return (defaults[trade]||defaults.autre).map(x=>({id:uid(),name:x[0],qty:x[1],unit:x[2],price:x[3],category:x[4]}));}
-let state=load()||{
- onboarded:false,activeTab:'home',trade:'plombier',company:{name:'',firstName:'',phone:'',email:'',address:'',siret:'',insurance:'',logo:''},
- servicesByTrade:{},clients:[],quotes:[],draft:null,settings:{vat:10,validity:30,mentions:'Devis établi sur estimation visuelle. Toute anomalie non visible pourra entraîner un ajustement après validation client. Les alimentations existantes pourront être remplacées si défaut de sécurité. Devis valable selon la durée indiquée.'}
+function makeCatalogue(trade){return (defaultServices[trade]||defaultServices.autre).map(x=>({id:uid(),name:x[0],qty:x[1],unit:x[2],price:x[3],category:x[4]}))}
+
+let state=loadState()||{
+ onboarded:false,activeTab:'home',trade:'plombier',
+ company:{name:'',firstName:'',phone:'',email:'',address:'',siret:'',insurance:'',logo:''},
+ servicesByTrade:{},
+ clients:[],quotes:[],draft:null,
+ settings:{vat:10,validity:30,mentions:'Devis établi sur estimation visuelle. Toute anomalie non visible pourra entraîner un ajustement après validation client. Devis valable selon la durée indiquée.'}
 };
-if(!state.servicesByTrade)state.servicesByTrade={};Object.keys(trades).forEach(k=>{if(!state.servicesByTrade[k])state.servicesByTrade[k]=catalogue(k)});state.catalogueTrade=state.catalogueTrade||state.trade;state.quotes=(state.quotes||[]).map(q=>({...q,items:(q.items||[]).map(it=>({...it,qty:Math.max(1,Number(it.qty)||1)}))}));
-function save(){localStorage.setItem(LS,JSON.stringify(state));}
-function load(){try{return JSON.parse(localStorage.getItem(LS)||'null')}catch(e){return null}}
-function theme(){return trades[state.trade]||trades.autre}
-function applyTheme(){const t=theme();document.documentElement.style.setProperty('--primary',t.primary);document.documentElement.style.setProperty('--secondary',t.primary==='#0D47A1'?'#1565C0':t.primary);document.documentElement.style.setProperty('--accent',t.accent)}
-function root(html){document.getElementById('root').innerHTML=html;bindCommon();}
-function render(){applyTheme(); state.onboarded?renderApp():renderOnboarding(); save();}
-window.render=render;
-function bindCommon(){document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{state.activeTab=b.dataset.tab;render()});}
-function renderOnboarding(){const t=theme();root(`<main class="onboarding">
- <section class="hero"><div class="logoRow"><div class="appLogo">🧾</div><div><div class="brand">Devis<span>Express</span></div><p class="tag">Devis, factures, clients, tarifs et relances depuis votre téléphone.</p></div></div><div class="trust"><div>🚀 100% rapide</div><div>🔒 Sans compte</div><div>🛡️ Vos données</div></div></section>
- <section class="panel"><div class="sectionTitle"><span class="ico">💼</span>1. Choisissez votre métier principal</div><p class="sub">Nous adaptons l’application à votre activité.</p>
- <div class="tradeGrid">${Object.entries(trades).map(([k,v])=>`<button class="tradeCard ${state.trade===k?'active':''}" data-trade="${k}"><span class="emoji">${v.icon}</span><span>${v.label}</span></button>`).join('')}</div>
- <button class="moreTrade" id="customTrade">＋ Je ne trouve pas mon métier</button>
- <div class="sectionTitle"><span class="ico">🏢</span>2. Vos informations <span style="color:#789">(optionnel)</span></div><p class="sub">Ces informations seront utilisées sur vos devis. Vous pourrez les modifier plus tard.</p>
- <div class="optionalInputs">
-   <input class="field" id="cName" placeholder="🏢 Nom de votre entreprise (optionnel)" value="${esc(state.company.name)}">
-   <input class="field" id="fName" placeholder="👤 Votre prénom (optionnel)" value="${esc(state.company.firstName)}">
-   <input class="field" id="phone" placeholder="📞 Téléphone (optionnel)" value="${esc(state.company.phone)}">
-   <input class="field" id="email" placeholder="✉️ Email (optionnel)" value="${esc(state.company.email)}">
-   <input class="field wide" id="addr" placeholder="📍 Adresse (optionnel)" value="${esc(state.company.address)}">
- </div>
- <div class="infoBox">ⓘ <b>Aucune information n’est obligatoire.</b><br>Vous pouvez commencer à créer vos devis immédiatement !</div>
- <button class="btn" id="enter">Accéder à mon espace →</button><div class="footerLock">🔒 Vos données restent uniquement sur votre appareil.</div>
+if(!state.servicesByTrade)state.servicesByTrade={};
+Object.keys(trades).forEach(k=>{if(!state.servicesByTrade[k])state.servicesByTrade[k]=makeCatalogue(k)});
+if(!state.settings)state.settings={vat:10,validity:30,mentions:''};
+if(!state.clients)state.clients=[];
+if(!state.quotes)state.quotes=[];
+
+function saveState(){localStorage.setItem(LS,JSON.stringify(state))}
+function loadState(){try{return JSON.parse(localStorage.getItem(LS)||'null')}catch(e){return null}}
+function theme(t){return trades[t||state.trade]||trades.autre}
+function applyTheme(){const t=theme();document.documentElement.style.setProperty('--primary',t.primary);document.documentElement.style.setProperty('--secondary',adjustColor(t.primary));document.documentElement.style.setProperty('--accent',t.accent)}
+function adjustColor(hex){return hex}
+
+/* ══════════════════════════════
+   RENDER
+══════════════════════════════ */
+window.render=function render(){applyTheme();state.onboarded?renderApp():renderOnboarding();saveState()}
+function root(html){document.getElementById('root').innerHTML=html;bindCommon()}
+function bindCommon(){document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{state.activeTab=b.dataset.tab;render()})}
+function renderApp(){({home:homePage,quote:quotePage,clients:clientsPage,track:trackPage,profile:profilePage}[state.activeTab]||homePage)()}
+
+/* ══════════════════════════════
+   MODAL SYSTEM
+══════════════════════════════ */
+function modal(html){
+  closeModal();
+  const el=document.createElement('div');
+  el.className='modal';el.id='modal';
+  el.innerHTML=`<div class="modalBox" id="modalBox">${html}</div>`;
+  document.body.appendChild(el);
+  el.onclick=e=>{if(e.target===el)closeModal()};
+  const esc=e=>{if(e.key==='Escape'){closeModal();document.removeEventListener('keydown',esc)}};
+  document.addEventListener('keydown',esc);
+}
+function modalWithHeader(title,body){
+  modal(`<div class="modalHeader"><h3 class="modalTitle">${esc(title)}</h3><button class="modalClose" onclick="closeModal()">✕</button></div>${body}`);
+}
+window.closeModal=()=>{document.getElementById('modal')?.remove()};
+
+/* ══════════════════════════════
+   ONBOARDING
+══════════════════════════════ */
+function renderOnboarding(){const t=theme();root(`
+<main class="onboarding">
+ <section class="hero">
+  <div class="logoRow">
+   <div class="appLogo">🧾</div>
+   <div><div class="brand">Devis<span>Express</span></div><p class="tag">Créez un devis professionnel en moins de 2 minutes.</p></div>
+  </div>
+  <div class="trust"><div>🚀 Ultra rapide</div><div>🔒 Sans compte</div><div>📱 Mobile-first</div></div>
  </section>
- <section class="desktopOnly previewGrid"><div class="card howCard"><b>Aperçu de votre devis</b><div style="margin-top:10px" class="pdfPreview">${pdfPreviewHTML(true)}</div></div><div class="card howCard"><b>Comment ça fonctionne ?</b><p class="sub">Un parcours court, pensé pour faire un devis sans friction.</p><div class="howSteps"><div>1️⃣ Choisissez un métier principal.</div><div>2️⃣ Ajoutez ou non vos informations.</div><div>3️⃣ Créez un devis rapide, puis générez le PDF.</div><div>🔒 Sans compte, données locales.</div></div></div></section>
- </main>`);
- document.querySelectorAll('[data-trade]').forEach(b=>b.onclick=()=>{state.trade=b.dataset.trade;save();renderOnboarding()});
- ['cName','fName','phone','email','addr'].forEach(id=>document.getElementById(id).oninput=e=>{const map={cName:'name',fName:'firstName',phone:'phone',email:'email',addr:'address'};state.company[map[id]]=e.target.value;save()});
+ <section class="panel">
+  <div class="sectionTitle"><span class="ico">💼</span>1. Votre métier</div>
+  <p class="sub">L'app s'adapte à votre activité automatiquement.</p>
+  <div class="tradeGrid">${Object.entries(trades).map(([k,v])=>`<button class="tradeCard ${state.trade===k?'active':''}" data-trade="${k}"><span class="emoji">${v.icon}</span><span>${v.label}</span></button>`).join('')}</div>
+  <button class="moreTrade" id="customTrade">＋ Mon métier n'est pas listé</button>
+  <div class="sectionTitle"><span class="ico">🏢</span>2. Vos informations <small style="color:#789;font-size:13px;font-weight:500">(facultatif)</small></div>
+  <p class="sub">Modifiables à tout moment dans Profil.</p>
+  <div class="optionalInputs">
+   <input class="field" id="cName" placeholder="🏢 Nom de votre entreprise" value="${esc(state.company.name)}">
+   <input class="field" id="fName" placeholder="👤 Votre prénom" value="${esc(state.company.firstName)}">
+   <input class="field" id="phone" placeholder="📞 Téléphone" value="${esc(state.company.phone)}">
+   <input class="field" id="email" placeholder="✉️ Email" value="${esc(state.company.email)}">
+   <input class="field wide" id="addr" placeholder="📍 Adresse" value="${esc(state.company.address)}">
+  </div>
+  <div class="infoBox">ⓘ <b>Aucune information n'est obligatoire.</b> Créez votre premier devis immédiatement !</div>
+  <button class="btn" id="enter" style="margin-top:8px">Accéder à mon espace →</button>
+  <button class="btn ghost" id="enterQuick" style="margin-top:8px">⚡ Créer un devis rapide</button>
+  <div class="footerLock">🔒 Vos données restent uniquement sur votre appareil.</div>
+ </section>
+ <section class="howSection">
+  <h3>💡 Comment ça fonctionne ?</h3>
+  <div class="howSteps">
+   <div class="howStep"><div class="howNum">1</div><div><b>Choisissez votre métier</b><br><small style="color:#789">L'app charge vos prestations par défaut</small></div></div>
+   <div class="howStep"><div class="howNum">2</div><div><b>Remplissez le devis</b><br><small style="color:#789">Client, prestations, montants</small></div></div>
+   <div class="howStep"><div class="howNum">3</div><div><b>Partagez en PDF</b><br><small style="color:#789">WhatsApp, email, téléchargement</small></div></div>
+  </div>
+  <p style="color:#789;font-size:12px;margin:10px 0 0;text-align:center">✅ Sans inscription · ✅ Hors ligne · ✅ Données privées</p>
+ </section>
+</main>`);
+ document.querySelectorAll('[data-trade]').forEach(b=>b.onclick=()=>{state.trade=b.dataset.trade;saveState();renderOnboarding()});
+ ['cName','fName','phone','email','addr'].forEach(id=>{const el=document.getElementById(id);if(el)el.oninput=e=>{const map={cName:'name',fName:'firstName',phone:'phone',email:'email',addr:'address'};state.company[map[id]]=e.target.value;saveState()}});
  document.getElementById('enter').onclick=()=>{state.onboarded=true;state.activeTab='home';render()};
+ document.getElementById('enterQuick').onclick=()=>{state.onboarded=true;state.activeTab='quote';state.draft=blankDraft();render()};
  document.getElementById('customTrade').onclick=()=>openTradeModal();
 }
-function shell(title,body){root(`<div class="app"><header class="topbar"><button class="iconBtn" onclick="openQuickMenu()">☰</button><b>${title}</b><button class="iconBtn" onclick="openProfileModal()">⚙</button></header><main class="content">${body}</main>${nav()}</div>`)}
-function nav(){return `<nav class="bottomNav noPrint">${[['home','🏠','Accueil'],['quote','➕','Devis'],['clients','👥','Clients'],['track','📊','Suivi'],['profile','👤','Profil']].map(x=>`<button data-tab="${x[0]}" class="navItem ${state.activeTab===x[0]?'active':''}"><span>${x[1]}</span>${x[2]}</button>`).join('')}</nav>`}
-function renderApp(){const pages={home:homePage,quote:quotePage,clients:clientsPage,track:trackPage,profile:profilePage};(pages[state.activeTab]||homePage)();}
-function homePage(){const qs=state.quotes;const pending=qs.filter(q=>q.status==='En attente').length, ok=qs.filter(q=>q.status==='Accepté').length, paid=qs.filter(q=>q.type==='facture'||q.status==='Payé').length, ca=qs.filter(q=>q.status==='Accepté'||q.status==='Payé').reduce((s,q)=>s+q.totalTTC,0);shell('DevisExpress',`<h1 class="pageTitle">Bonjour !</h1><p class="sub">Voici votre activité</p><div class="dashGrid"><div class="stat blue">Devis en attente<b>${pending}</b></div><div class="stat green">Devis acceptés<b>${ok}</b></div><div class="stat orange">Factures payées<b>${paid}</b></div><div class="stat purple">CA estimé<b style="font-size:20px">${money(ca)}</b></div></div><div class="toolbar"><button class="btn" onclick="newQuote()">＋ Nouveau devis</button><button class="btn ghost" onclick="demoQuote()">Démo</button></div><h3>Activité récente</h3><div class="list">${qs.slice(-6).reverse().map(q=>quoteItem(q)).join('')||'<div class="empty">Aucun devis pour le moment.</div>'}</div>`)}
-function quoteItem(q){return `<div class="item" onclick="openQuote('${q.id}')"><div><h4>${q.number}</h4><p>${esc(q.client.name||'Client non renseigné')} · ${new Date(q.date).toLocaleDateString('fr-FR')}</p></div><div style="text-align:right"><b>${money(q.totalTTC)}</b><br><span class="badge ${q.status==='Accepté'?'ok':q.status==='Payé'?'paid':'wait'}">${q.status}</span></div></div>`}
-function blankDraft(){return {id:uid(),number:'DEV-'+new Date().getFullYear()+'-'+String(Math.floor(1000+Math.random()*9000)),date:today(),validity:state.settings.validity,step:1,client:{name:'',phone:'',email:'',address:''},title:theme().hero,description:'',items:[],observations:'',status:'Brouillon',type:'devis'};}
-function ensureDraft(){if(!state.draft)state.draft=blankDraft();}
-function newQuote(){state.draft=blankDraft();state.activeTab='quote';render()}
-function quotePage(){ensureDraft();const d=state.draft;shell('Nouveau devis',`<h1 class="pageTitle">Nouveau devis</h1><div class="stepper"><div class="step ${d.step===1?'active':''}">1 Client</div><div class="step ${d.step===2?'active':''}">2 Prestations</div><div class="step ${d.step===3?'active':''}">3 Aperçu</div></div>${quoteStepHTML(d)}`);bindQuote();}
-function quoteStepHTML(d){if(d.step===1)return `<div class="quoteStep active"><div class="label">Informations client</div><input class="field draft" data-path="client.name" placeholder="Nom du client" value="${esc(d.client.name)}"><input class="field draft" data-path="client.phone" placeholder="Téléphone" value="${esc(d.client.phone)}" style="margin-top:9px"><input class="field draft" data-path="client.email" placeholder="Email" value="${esc(d.client.email)}" style="margin-top:9px"><textarea class="field draft" data-path="client.address" placeholder="Adresse du chantier" style="margin-top:9px">${esc(d.client.address)}</textarea><div class="label">Travaux</div><input class="field draft" data-path="title" placeholder="Titre du devis" value="${esc(d.title)}"><textarea class="field draft" data-path="description" placeholder="Description courte" style="margin-top:9px">${esc(d.description)}</textarea><div class="toolbar"><button class="btn ghost" onclick="saveDraftOnly()">Enregistrer</button><button class="btn" onclick="goStep(2)">Suivant</button></div><button class="btn danger" onclick="resetDraftConfirm()" style="margin-top:8px">Réinitialiser le devis</button><div class="toolbar" style="display:none"></div></div>`;
- if(d.step===2)return `<div class="quoteStep active"><div class="label">Ajouter une prestation</div><select class="field" id="catalogueTrade">${Object.entries(trades).map(([k,v])=>`<option value="${k}" ${state.catalogueTrade===k?'selected':''}>${v.label}</option>`).join('')}</select><input class="field" id="serviceSearch" placeholder="🔎 Rechercher une prestation..." style="margin-top:9px"><div id="catalogueList" class="list" style="margin-top:10px">${catalogueListHTML()}</div><button class="btn ghost" onclick="openServiceModal()" style="margin-top:10px">＋ Prestation personnalisée</button><div class="label">Prestations sélectionnées</div><div class="list">${d.items.map((it,i)=>selectedItemHTML(it,i)).join('')||'<div class="empty">Aucune prestation sélectionnée.</div>'}</div>${totalsHTML(d)}<div class="toolbar"><button class="btn ghost" onclick="goStep(1)">Retour</button><button class="btn" onclick="goStep(3)">Suivant</button></div></div>`;
- return `<div class="quoteStep active"><div class="label">Récapitulatif</div>${pdfPreviewHTML(false)}<div class="toolbar"><button class="btn ghost" onclick="goStep(2)">Modifier</button><button class="btn" onclick="finalizeQuote()">Générer le devis</button></div><div class="toolbar"><button class="btn orange" onclick="downloadDraftPdf()">Télécharger PDF</button><button class="btn danger" onclick="resetDraftConfirm()">Réinitialiser</button></div></div>`}
-function catalogueListHTML(){const tr=state.catalogueTrade||state.trade;return (state.servicesByTrade[tr]||[]).map(s=>`<div class="item"><div><h4>${esc(s.name)}</h4><p>${esc(s.category)} · ${money(s.price)} / ${esc(s.unit)}</p></div><button class="btn small ghost" onclick="addService('${s.id}')">Ajouter</button></div>`).join('')}
-function selectedItemHTML(it,i){return `<div class="serviceRow"><div class="serviceTop"><div><div class="serviceName">${esc(it.name)}</div><p style="margin:4px 0;color:#789">${it.qty} × ${money(it.price)} · ${esc(it.unit)}</p></div><div class="servicePrice">${money(it.qty*it.price)}</div></div><div class="qtyBox"><button class="qtyBtn" onclick="changeQty(${i},-1)">−</button><span class="qtyVal">${it.qty}</span><button class="qtyBtn" onclick="changeQty(${i},1)">＋</button></div><div class="inlineActions"><button onclick="editSelected(${i})">Modifier</button><button onclick="duplicateSelected(${i})">Dupliquer</button><button onclick="removeSelected(${i})">Supprimer</button></div></div>`}
-function totals(d){const ht=d.items.reduce((s,it)=>s+(Number(it.qty)||0)*(Number(it.price)||0),0),tva=ht*(Number(state.settings.vat)||0)/100;return {ht,tva,ttc:ht+tva}}
-function totalsHTML(d){const t=totals(d);return `<div class="totalBox"><div class="totalLine"><span>Total HT</span><b>${money(t.ht)}</b></div><div class="totalLine"><span>TVA ${state.settings.vat}%</span><b>${money(t.tva)}</b></div><div class="totalLine ttc"><span>Total TTC</span><b>${money(t.ttc)}</b></div></div>`}
-function bindQuote(){document.querySelectorAll('.draft').forEach(el=>el.oninput=e=>{setPath(state.draft,el.dataset.path,e.target.value);save()});const trSel=document.getElementById('catalogueTrade');if(trSel)trSel.onchange=e=>{state.catalogueTrade=e.target.value;save();render()};const s=document.getElementById('serviceSearch');if(s)s.oninput=e=>{const q=e.target.value.toLowerCase();const tr=state.catalogueTrade||state.trade;document.getElementById('catalogueList').innerHTML=(state.servicesByTrade[tr]||[]).filter(x=>x.name.toLowerCase().includes(q)||x.category.toLowerCase().includes(q)).map(x=>`<div class="item"><div><h4>${esc(x.name)}</h4><p>${esc(x.category)} · ${money(x.price)}</p></div><button class="btn small ghost" onclick="addService('${x.id}')">Ajouter</button></div>`).join('')||'<div class="empty">Aucun résultat.</div>'}}
-function setPath(o,path,val){const p=path.split('.');let x=o;while(p.length>1)x=x[p.shift()];x[p[0]]=val}
-window.goStep=n=>{state.draft.step=n;render()};window.saveDraftOnly=()=>{save();toast('Brouillon enregistré')};
-window.addService=id=>{const tr=state.catalogueTrade||state.trade;const s=(state.servicesByTrade[tr]||[]).find(x=>x.id===id);if(s){state.draft.items.push({...s,id:uid(),qty:Math.max(1,Number(s.qty)||1),sourceTrade:tr});save();render()}};
-window.changeQty=(i,n)=>{state.draft.items[i].qty=Math.max(1,Number(state.draft.items[i].qty||1)+n);save();render()};
-window.removeSelected=i=>{state.draft.items.splice(i,1);save();render()};window.duplicateSelected=i=>{state.draft.items.splice(i+1,0,{...state.draft.items[i],id:uid()});save();render()};window.editSelected=i=>openServiceModal(state.draft.items[i],i);
-function pdfPreviewHTML(onboard){const d=state.draft||blankDraft();const c=state.company,t=theme(),items=(d.items&&d.items.length)?d.items:catalogue(state.trade).slice(0,4);let cats={};items.forEach(it=>{it.qty=Math.max(1,Number(it.qty)||1);(cats[it.category||'PRESTATIONS']??=[]).push(it)});const info=[c.address,c.phone,c.email,c.siret?'SIRET : '+c.siret:''].filter(Boolean).map(esc).join('<br>')||'Coordonnées entreprise optionnelles';const docType=(d.type==='facture')?'FACTURE':'DEVIS';return `<div class="pdfPreview"><div class="pdfHead"><div style="display:flex;gap:9px"><div class="pdfLogo">${t.icon}</div><div><b>${esc(c.name||'VOTRE ENTREPRISE')}</b><br><span style="color:var(--primary);font-weight:900">${esc(t.subtitle).toUpperCase()}</span><br><small>${info}</small></div></div><div class="pdfTitle">${docType}</div></div><b>${esc(d.title||t.hero).toUpperCase()}</b>${d.description?`<p>${esc(d.description)}</p>`:''}<table class="miniTable"><thead><tr><th>DÉSIGNATION</th><th>QTÉ</th><th>TOTAL HT</th></tr></thead><tbody>${Object.entries(cats).map(([cat,arr])=>`<tr class="catRow"><td colspan="3">${esc(cat)}</td></tr>${arr.map(it=>`<tr><td>${esc(it.name)}</td><td>${Math.max(1,Number(it.qty)||1)}</td><td>${money((Math.max(1,Number(it.qty)||1))*it.price)}</td></tr>`).join('')}`).join('')}</tbody></table>${totalsHTML({items})}<div style="margin-top:12px;border:1px solid #f1d6ad;border-radius:12px;padding:10px;font-size:11px"><b>Mentions de protection</b><br>${esc(state.settings.mentions||'Devis établi selon les éléments fournis par le client.')}</div></div>`}
-function createQuoteFromDraft(status='En attente'){const d=state.draft;d.items=d.items.map(it=>({...it,qty:Math.max(1,Number(it.qty)||1)}));const t=totals(d);const q={...JSON.parse(JSON.stringify(d)),id:uid(),date:d.date||today(),status,type:'devis',totalHT:t.ht,totalTVA:t.tva,totalTTC:t.ttc,trade:state.trade};state.quotes.push(q);if(q.client.name&&!state.clients.some(c=>c.name.toLowerCase()===q.client.name.toLowerCase()))state.clients.push({...q.client,id:uid()});state.draft=null;save();return q}
-window.finalizeQuote=()=>{const q=createQuoteFromDraft();successPage(q)};
-function successPage(q){shell('Devis généré',`<div class="successView"><div class="check">✓</div><h2>Devis créé avec succès !</h2><p>${q.number}</p><button class="btn" onclick="openQuote('${q.id}')">Voir le devis</button><br><br><button class="btn ghost" onclick="shareQuote('${q.id}')">Partager / WhatsApp</button><br><br><button class="btn ghost" onclick="emailQuote('${q.id}')">Envoyer par email</button><br><br><button class="btn ghost" onclick="downloadPdf('${q.id}')">Télécharger PDF</button><br><br><button class="btn danger" onclick="state.activeTab='home';render()">Retour accueil</button></div>`)}
-window.openQuote=id=>{const q=state.quotes.find(x=>x.id===id);if(!q)return;state.activeTab='track';shell(q.number,`${quoteDetailHTML(q)}`)};
-function quoteDetailHTML(q){return `<div class="pdfPreview">${pdfDocHTML(q)}</div><div class="toolbar noPrint"><button class="btn" onclick="downloadPdf('${q.id}')">PDF</button><button class="btn ghost" onclick="shareQuote('${q.id}')">Partager</button></div><div class="toolbar noPrint"><button class="btn ghost" onclick="markQuote('${q.id}','Accepté')">Accepté</button><button class="btn orange" onclick="makeInvoice('${q.id}')">Facture</button></div><div class="toolbar noPrint"><button class="btn ${q.status==='Payé'?'ghost':'green'}" onclick="markQuote('${q.id}','Payé')" ${q.status==='Payé'?'disabled':''}>${q.status==='Payé'?'Payé':'Marquer payé'}</button><button class="btn danger" onclick="deleteQuote('${q.id}')">Supprimer</button></div>`}
-function pdfDocHTML(q){const oldDraft=state.draft;state.draft=q;const html=pdfPreviewHTML(false);state.draft=oldDraft;return html}
-function clientsPage(){shell('Clients',`<h1 class="pageTitle">Clients</h1><button class="btn" onclick="openClientModal()">＋ Ajouter client</button><div class="list" style="margin-top:14px">${state.clients.map(c=>`<div class="item" onclick="openClientDetail('${c.id}')"><div><h4>${esc(c.name||'Client')}</h4><p>${esc(c.phone||'')} ${c.email?' · '+esc(c.email):''}</p></div><span>›</span></div>`).join('')||'<div class="empty">Aucun client enregistré.</div>'}</div>`)}
-function trackPage(){shell('Suivi',`<h1 class="pageTitle">Suivi activité</h1><div class="toolbar"><button class="btn ghost" onclick="exportData()">Exporter</button><button class="btn ghost" onclick="document.getElementById('importFile').click()">Importer</button><input id="importFile" type="file" accept="application/json" class="hidden" onchange="importData(event)"></div><div class="list">${state.quotes.slice().reverse().map(quoteItem).join('')||'<div class="empty">Aucun devis généré.</div>'}</div>`)}
-function profilePage(){const c=state.company;shell('Profil',`<h1 class="pageTitle">Profil</h1><p class="sub">Toutes ces informations sont optionnelles et modifiables.</p><div class="card" style="padding:14px"><div class="label">Métier principal</div><select class="field" id="tradeSelect">${Object.entries(trades).map(([k,v])=>`<option value="${k}" ${state.trade===k?'selected':''}>${v.label}</option>`).join('')}</select><div class="label">Entreprise</div><input class="field prof" data-k="name" placeholder="Nom entreprise" value="${esc(c.name)}"><input class="field prof" data-k="firstName" placeholder="Prénom" value="${esc(c.firstName)}" style="margin-top:9px"><input class="field prof" data-k="phone" placeholder="Téléphone" value="${esc(c.phone)}" style="margin-top:9px"><input class="field prof" data-k="email" placeholder="Email" value="${esc(c.email)}" style="margin-top:9px"><textarea class="field prof" data-k="address" placeholder="Adresse" style="margin-top:9px">${esc(c.address)}</textarea><input class="field prof" data-k="siret" placeholder="SIRET" value="${esc(c.siret)}" style="margin-top:9px"><input class="field prof" data-k="insurance" placeholder="Assurance décennale" value="${esc(c.insurance)}" style="margin-top:9px"><div class="label">Réglages devis</div><input class="field" id="vat" type="number" placeholder="TVA %" value="${state.settings.vat}"><input class="field" id="validity" type="number" placeholder="Validité jours" value="${state.settings.validity}" style="margin-top:9px"><textarea class="field" id="mentions" placeholder="Mentions de protection" style="margin-top:9px">${esc(state.settings.mentions)}</textarea><button class="btn" onclick="saveProfile()" style="margin-top:12px">Enregistrer</button></div><h3>Prestations du métier</h3><button class="btn ghost" onclick="openServiceModal(null,null,true)">＋ Ajouter une prestation au catalogue</button><div class="list" style="margin-top:10px">${state.servicesByTrade[state.trade].map(s=>`<div class="item"><div><h4>${esc(s.name)}</h4><p>${esc(s.category)} · ${money(s.price)} / ${esc(s.unit)}</p></div><button class="btn small ghost" onclick="openServiceModalById('${s.id}')">Modifier</button></div>`).join('')}</div>`);document.getElementById('tradeSelect').onchange=e=>{state.trade=e.target.value;save();render()};}
-window.saveProfile=()=>{document.querySelectorAll('.prof').forEach(i=>state.company[i.dataset.k]=i.value);state.settings.vat=Number(document.getElementById('vat').value)||0;state.settings.validity=Number(document.getElementById('validity').value)||30;state.settings.mentions=document.getElementById('mentions').value;save();toast('Profil enregistré');render()};
-function openServiceModal(item=null,index=null,toCatalog=false){const it=item||{name:'',qty:1,unit:'forfait',price:0,category:'PRESTATION'};modal(`<h3 class="modalTitle">${item?'Modifier':'Nouvelle'} prestation</h3><input class="field" id="mName" placeholder="Intitulé" value="${esc(it.name)}"><div class="grid2" style="margin-top:9px"><input class="field" id="mQty" type="number" step="1" placeholder="Qté" value="${it.qty||1}"><select class="field" id="mUnit"><option>forfait</option><option>u</option><option>m²</option><option>ml</option><option>lot</option><option>h</option><option>jour</option></select></div><input class="field" id="mPrice" type="number" step="0.01" placeholder="Prix HT" value="${it.price||0}" style="margin-top:9px"><input class="field" id="mCat" placeholder="Catégorie" value="${esc(it.category||'PRESTATION')}" style="margin-top:9px"><div class="toolbar"><button class="btn ghost" onclick="closeModal()">Annuler</button><button class="btn" id="saveService">Enregistrer</button></div>`);document.getElementById('mUnit').value=it.unit||'forfait';document.getElementById('saveService').onclick=()=>{const obj={id:it.id||uid(),name:val('mName')||'Prestation',qty:Number(val('mQty'))||1,unit:val('mUnit'),price:Number(val('mPrice'))||0,category:val('mCat')||'PRESTATION'};if(index!==null)state.draft.items[index]=obj;else if(toCatalog)state.servicesByTrade[state.trade].push(obj);else {ensureDraft();state.draft.items.push(obj);}save();closeModal();render()}}
-window.openServiceModalById=id=>{const arr=state.servicesByTrade[state.trade],i=arr.findIndex(x=>x.id===id);openServiceModal(arr[i],null,true);setTimeout(()=>{document.getElementById('saveService').onclick=()=>{arr[i]={id,name:val('mName')||'Prestation',qty:Number(val('mQty'))||1,unit:val('mUnit'),price:Number(val('mPrice'))||0,category:val('mCat')||'PRESTATION'};save();closeModal();render()}},0)}
-function val(id){return document.getElementById(id).value}
-function modal(html){document.getElementById('modal')?.remove();document.body.insertAdjacentHTML('beforeend',`<div class="modal" id="modal"><div class="modalBox"><button onclick="closeModal()" style="float:right;background:#eef5ff;border-radius:10px;width:34px;height:34px;color:var(--primary);font-weight:900">✕</button>${html}</div></div>`);document.getElementById('modal').onclick=e=>{if(e.target.id==='modal')closeModal()};document.onkeydown=e=>{if(e.key==='Escape')closeModal()}}window.closeModal=()=>{document.getElementById('modal')?.remove();document.onkeydown=null};
-function openTradeModal(){modal(`<h3 class="modalTitle">Votre métier</h3><input id="customTradeName" class="field" placeholder="Ex : Serrurier, décorateur, coach..."><div class="toolbar"><button class="btn ghost" onclick="closeModal()">Annuler</button><button class="btn" onclick="addCustomTrade()">Utiliser ce métier</button></div>`);setTimeout(()=>document.getElementById('customTradeName')?.focus(),50)}
-window.addCustomTrade=()=>{const name=val('customTradeName')||'Autre métier';trades.autre.label=name;state.trade='autre';closeModal();renderOnboarding()};
-window.openQuickMenu=()=>modal(`<h3 class="modalTitle">Menu rapide</h3><button class="btn" onclick="closeModal();newQuote()">Nouveau devis</button><br><br><button class="btn ghost" onclick="closeModal();demoQuote()">Charger une démo</button><br><br><button class="btn danger" onclick="closeModal()">Fermer</button>`);window.openProfileModal=()=>{state.activeTab='profile';render()};
-function openClientModal(clientId=null){const c=clientId?state.clients.find(x=>x.id===clientId):{name:'',phone:'',email:'',address:''};modal(`<h3 class="modalTitle">${clientId?'Modifier':'Ajouter'} client</h3><input class="field" id="clName" placeholder="Nom" value="${esc(c?.name||'')}"><input class="field" id="clPhone" placeholder="Téléphone" value="${esc(c?.phone||'')}" style="margin-top:9px"><input class="field" id="clEmail" placeholder="Email" value="${esc(c?.email||'')}" style="margin-top:9px"><textarea class="field" id="clAddr" placeholder="Adresse" style="margin-top:9px">${esc(c?.address||'')}</textarea><div class="toolbar"><button class="btn ghost" onclick="closeModal()">Annuler</button><button class="btn" onclick="saveClient('${clientId||''}')">Enregistrer</button></div>`)}window.openClientModal=openClientModal;window.saveClient=(id='')=>{const obj={id:id||uid(),name:val('clName'),phone:val('clPhone'),email:val('clEmail'),address:val('clAddr')};const i=state.clients.findIndex(c=>c.id===id);if(i>=0)state.clients[i]=obj;else state.clients.push(obj);save();closeModal();render()};window.openClientDetail=id=>{const c=state.clients.find(x=>x.id===id);if(!c)return;modal(`<h3 class="modalTitle">${esc(c.name||'Client')}</h3><p><b>Téléphone :</b> ${esc(c.phone||'-')}<br><b>Email :</b> ${esc(c.email||'-')}<br><b>Adresse :</b><br>${esc(c.address||'-')}</p><button class="btn" onclick="useClientInDraft('${id}')">Utiliser dans un devis</button><div class="toolbar"><button class="btn ghost" onclick="openClientModal('${id}')">Modifier</button><button class="btn danger" onclick="deleteClient('${id}')">Supprimer</button></div>`)};window.useClientInDraft=id=>{const c=state.clients.find(x=>x.id===id);ensureDraft();state.draft.client={name:c.name||'',phone:c.phone||'',email:c.email||'',address:c.address||''};state.draft.step=1;state.activeTab='quote';closeModal();render()};window.deleteClient=id=>{if(confirm('Supprimer ce client ?')){state.clients=state.clients.filter(c=>c.id!==id);save();closeModal();render()}};
-function demoQuote(){state.draft=blankDraft();state.draft.client={name:'Dupont',phone:'06 12 34 56 78',email:'dupont@email.fr',address:'123 Rue des Lilas, 75000 Paris'};state.draft.items=catalogue(state.trade).slice(0,6);state.draft.step=3;state.activeTab='quote';render()}window.demoQuote=demoQuote;
-function jsPdfQuote(q){const {jsPDF}=window.jspdf;const doc=new jsPDF('p','mm','a4');const t=trades[q.trade]||theme(),c=state.company;let y=14;doc.setTextColor(11,31,68);doc.setFont('helvetica','bold');doc.setFontSize(18);doc.text(c.name||'VOTRE ENTREPRISE',28,y+5);doc.setTextColor(t.primary);doc.setFontSize(11);doc.text((t.subtitle||'Service professionnel').toUpperCase(),28,y+11);doc.setDrawColor(t.primary);doc.setLineWidth(.8);doc.roundedRect(10,y,14,14,2,2);doc.setTextColor(t.accent);doc.setFontSize(12);doc.text(t.icon==='•••'?'•':t.icon,14,y+9);doc.setTextColor(30,45,70);doc.setFont('helvetica','normal');doc.setFontSize(9);let info=[c.address,c.phone,c.email,c.siret?'SIRET : '+c.siret:'',c.insurance?'Assurance : '+c.insurance:''].filter(Boolean);info.forEach((l,i)=>doc.text(String(l),28,y+18+i*5));doc.setFillColor(hex(t.primary));doc.roundedRect(138,10,62,13,2,2,'F');doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(18);doc.text(q.type==='facture'?'FACTURE':'DEVIS',169,19,{align:'center'});doc.setTextColor(11,31,68);doc.setFontSize(9);doc.roundedRect(138,28,62,31,2,2);[['N° :',q.number],['Date :',new Date(q.date).toLocaleDateString('fr-FR')],['Validité :',q.validity+' jours'],['Client :',q.client.name||'-'],['Téléphone :',q.client.phone||'-']].forEach((r,i)=>{doc.setFont('helvetica','bold');doc.text(r[0],143,36+i*5);doc.setFont('helvetica','normal');doc.text(String(r[1]),166,36+i*5)});y=70;doc.setFillColor(hex(t.primary));doc.roundedRect(10,y,190,9,2,2,'F');doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(11);doc.text((q.title||t.hero).toUpperCase(),13,y+6);y+=14;doc.setTextColor(11,31,68);doc.setFontSize(10);doc.text('Type de travaux :',18,y);doc.setFont('helvetica','normal');doc.setFontSize(9);doc.text(doc.splitTextToSize(q.description||'Prestation réalisée selon les éléments fournis par le client.',160),18,y+6);y+=22;doc.setFont('helvetica','bold');doc.setFillColor(hex(t.primary));doc.setTextColor(255,255,255);doc.rect(10,y,100,8,'F');doc.rect(110,y,25,8,'F');doc.rect(135,y,30,8,'F');doc.rect(165,y,35,8,'F');doc.text('DÉSIGNATION',60,y+5,{align:'center'});doc.text('QTÉ',122,y+5,{align:'center'});doc.text('PU HT',150,y+5,{align:'center'});doc.text('TOTAL HT',183,y+5,{align:'center'});y+=8;const cats={};q.items.forEach(it=>(cats[it.category||'PRESTATIONS']??=[]).push(it));doc.setFontSize(8);Object.entries(cats).forEach(([cat,arr])=>{if(y>250){doc.addPage();y=15}doc.setFillColor(239,244,250);doc.setTextColor(11,31,68);doc.setFont('helvetica','bold');doc.rect(10,y,190,7,'F');doc.text(cat,13,y+5);y+=7;doc.setFont('helvetica','normal');arr.forEach(it=>{if(y>260){doc.addPage();y=15}doc.setDrawColor(200,213,230);doc.rect(10,y,100,7);doc.rect(110,y,25,7);doc.rect(135,y,30,7);doc.rect(165,y,35,7);doc.setTextColor(20,30,45);doc.text(String(it.name).slice(0,58),13,y+5);doc.text(String(it.qty),122,y+5,{align:'center'});doc.text(money(it.price).replace('€','€'),160,y+5,{align:'right'});doc.text(money(it.qty*it.price).replace('€','€'),196,y+5,{align:'right'});y+=7})});const tt={ht:q.totalHT,tva:q.totalTVA,ttc:q.totalTTC};y+=3;[['TOTAL HT',tt.ht,false],['TVA '+state.settings.vat+' %',tt.tva,false],['TOTAL TTC',tt.ttc,true]].forEach(r=>{doc.setFillColor(r[2]?hex(t.accent):hex(t.primary));doc.setTextColor(255,255,255);doc.rect(122,y,43,8,'F');doc.text(r[0],125,y+5);doc.setTextColor(11,31,68);doc.rect(165,y,35,8);doc.text(money(r[1]),197,y+5,{align:'right'});y+=8});y+=10;if(y<245){doc.setDrawColor(180,199,225);doc.roundedRect(10,y,85,35,2,2);doc.setTextColor(11,31,68);doc.setFont('helvetica','bold');doc.text('OBSERVATIONS',15,y+8);doc.setFont('helvetica','normal');doc.text(doc.splitTextToSize(q.observations||'Travaux réalisés selon validation client. Contrôle et mise en service inclus selon prestation.',74),15,y+15);doc.setDrawColor(235,172,80);doc.roundedRect(105,y,95,35,2,2);doc.setFont('helvetica','bold');doc.text('MENTIONS DE PROTECTION',110,y+8);doc.setFont('helvetica','normal');doc.text(doc.splitTextToSize(state.settings.mentions,84),110,y+15)}doc.setFont('helvetica','italic');doc.setTextColor(t.primary);doc.text('Merci pour votre confiance !',105,286,{align:'center'});return doc}
-function hex(h){h=h.replace('#','');return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]}
-window.downloadDraftPdf=()=>{if(!window.jspdf){alert('Génération PDF indisponible. Vérifiez votre connexion internet.');return}ensureDraft();state.draft.items=state.draft.items.map(it=>({...it,qty:Math.max(1,Number(it.qty)||1)}));const tt=totals(state.draft);const q={...state.draft,trade:state.trade,totalHT:tt.ht,totalTVA:tt.tva,totalTTC:tt.ttc};jsPdfQuote(q).save((q.number||'devis')+'.pdf')};window.downloadPdf=id=>{if(!window.jspdf){alert('Génération PDF indisponible. Vérifiez votre connexion internet.');return}const q=state.quotes.find(x=>x.id===id);if(q)jsPdfQuote(q).save(q.number+'.pdf');else alert('Aucun document disponible.')};
-window.shareQuote=async id=>{const q=state.quotes.find(x=>x.id===id);if(!q)return;const text=`Bonjour, voici le ${q.type||'devis'} ${q.number} d'un montant de ${money(q.totalTTC)} TTC.`;try{const blob=jsPdfQuote(q).output('blob');const file=new File([blob],q.number+'.pdf',{type:'application/pdf'});if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:q.number,text,files:[file]});return}}catch(e){}window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank')};
-window.emailQuote=id=>{const q=state.quotes.find(x=>x.id===id);if(q){try{downloadPdf(id);toast('PDF téléchargé : joignez-le au mail si besoin.')}catch(e){}location.href=`mailto:${q.client.email||''}?subject=${encodeURIComponent(q.number)}&body=${encodeURIComponent('Bonjour, vous trouverez ci-joint le document '+q.number+' d’un montant de '+money(q.totalTTC)+' TTC. Si la pièce jointe ne s’ajoute pas automatiquement, merci de joindre le PDF téléchargé.')}`}};
-window.markQuote=(id,status)=>{const q=state.quotes.find(x=>x.id===id);if(q)q.status=status;save();openQuote(id)};window.makeInvoice=id=>{const q=state.quotes.find(x=>x.id===id);if(!q)return;if(q.type==='facture'){openQuote(id);return}q.status='Facturé';const f={...JSON.parse(JSON.stringify(q)),id:uid(),number:q.number.replace('DEV','FAC'),type:'facture',status:'Facturé',date:today()};state.quotes.push(f);save();openQuote(f.id)};window.deleteQuote=id=>{if(confirm('Supprimer ce document ?')){state.quotes=state.quotes.filter(q=>q.id!==id);save();state.activeTab='track';render()}};window.resetDraftConfirm=()=>{if(confirm('Effacer le devis en cours et repartir à zéro ?')){state.draft=blankDraft();save();render()}};
-window.exportData=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(state,null,2)],{type:'application/json'}));a.download='devisexpress-sauvegarde.json';a.click()};window.importData=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{state=JSON.parse(r.result);save();render()}catch(err){alert('Fichier invalide')}};r.readAsText(f)};
-function toast(msg){const d=document.createElement('div');d.textContent=msg;d.style.cssText='position:fixed;left:50%;bottom:86px;transform:translateX(-50%);background:#0b1f44;color:#fff;padding:10px 14px;border-radius:999px;z-index:999;font-weight:800';document.body.appendChild(d);setTimeout(()=>d.remove(),1600)}
 
-window.newQuote=newQuote;window.openTradeModal=openTradeModal;window.openServiceModal=openServiceModal;window.closeModal=window.closeModal;window.render=render;
-render();
-console.assert(typeof window.render==='function','render global');
+/* ══════════════════════════════
+   SHELL / NAV
+══════════════════════════════ */
+function shell(title,body){root(`
+<div class="app">
+ <header class="topbar">
+  <button class="iconBtn" onclick="openQuickMenu()">☰</button>
+  <b>${esc(title)}</b>
+  <button class="iconBtn" onclick="state.activeTab='profile';render()">⚙</button>
+ </header>
+ <main class="content">${body}</main>
+ ${nav()}
+</div>`)}
+function nav(){return `<nav class="bottomNav noPrint">${[['home','🏠','Accueil'],['quote','➕','Devis'],['clients','👥','Clients'],['track','📊','Suivi'],['profile','👤','Profil']].map(x=>`<button data-tab="${x[0]}" class="navItem${state.activeTab===x[0]?' active':''}"><span>${x[1]}</span>${x[2]}</button>`).join('')}</nav>`}
+
+/* ══════════════════════════════
+   HOME
+══════════════════════════════ */
+function homePage(){
+ const qs=state.quotes;
+ const pending=qs.filter(q=>q.status==='En attente').length;
+ const ok=qs.filter(q=>q.status==='Accepté').length;
+ const paid=qs.filter(q=>q.status==='Payé').length;
+ const ca=qs.filter(q=>['Accepté','Payé'].includes(q.status)).reduce((s,q)=>s+(q.totalTTC||0),0);
+ shell('DevisExpress',`
+  <h1 class="pageTitle">Bonjour ${esc(state.company.firstName||'!')}${state.company.firstName?' 👋':''}</h1>
+  <p class="sub">Votre tableau de bord</p>
+  <div class="dashGrid">
+   <div class="stat blue">En attente<b>${pending}</b></div>
+   <div class="stat green">Acceptés<b>${ok}</b></div>
+   <div class="stat orange">Payés<b>${paid}</b></div>
+   <div class="stat purple">CA estimé<b style="font-size:18px">${money(ca)}</b></div>
+  </div>
+  <div class="toolbar">
+   <button class="btn" onclick="newQuote()">＋ Nouveau devis</button>
+   <button class="btn ghost" onclick="demoQuote()">Démo</button>
+  </div>
+  <h3>Activité récente</h3>
+  <div class="list">${qs.slice(-8).reverse().map(quoteItem).join('')||'<div class="empty">Aucun devis pour le moment.<br><br><button class="btn" onclick="newQuote()" style="max-width:200px">Créer mon premier devis</button></div>'}</div>
+ `);
+}
+function quoteItem(q){
+ const badgeCls=q.status==='Accepté'?'ok':q.status==='Payé'?'paid':q.type==='facture'?'inv':q.status==='Brouillon'?'draft':'wait';
+ return `<div class="item" onclick="openQuote('${q.id}')" style="cursor:pointer">
+  <div style="flex:1;min-width:0"><h4>${esc(q.number)}</h4><p>${esc(q.client?.name||'Client non renseigné')} · ${new Date(q.date).toLocaleDateString('fr-FR')}</p></div>
+  <div style="text-align:right;flex-shrink:0"><b>${money(q.totalTTC)}</b><br><span class="badge ${badgeCls}">${q.status}</span></div>
+ </div>`
+}
+
+/* ══════════════════════════════
+   DRAFT
+══════════════════════════════ */
+function blankDraft(){
+ return {
+  id:uid(),
+  number:'DEV-'+new Date().getFullYear()+'-'+String(1000+Math.floor(Math.random()*9000)),
+  date:today(),validity:state.settings.validity||30,step:1,
+  client:{name:'',phone:'',email:'',address:''},
+  title:theme().label+' - Devis',
+  description:'',items:[],observations:'',
+  status:'Brouillon',type:'devis'
+ };
+}
+function ensureDraft(){if(!state.draft)state.draft=blankDraft()}
+function newQuote(){state.draft=blankDraft();state.activeTab='quote';render()}
+window.newQuote=newQuote;
+
+/* ══════════════════════════════
+   QUOTE PAGE
+══════════════════════════════ */
+function quotePage(){
+ ensureDraft();const d=state.draft;
+ shell('Nouveau devis',`
+  <div class="pageTitle">Nouveau devis</div>
+  <p class="sub">${d.number}</p>
+  <div class="stepper">
+   <div class="step ${d.step>1?'done':d.step===1?'active':''}">1 Client</div>
+   <div class="step ${d.step>2?'done':d.step===2?'active':''}">2 Prestations</div>
+   <div class="step ${d.step===3?'active':''}">3 Aperçu</div>
+  </div>
+  ${quoteStepHTML(d)}
+  <div class="toolbar noPrint" style="margin-top:8px">
+   <button class="btn danger small" onclick="confirmReset()">🗑 Réinitialiser</button>
+  </div>
+ `);
+ bindQuote();
+}
+function quoteStepHTML(d){
+ if(d.step===1)return `
+  <div class="label">Client</div>
+  <input class="field draft" data-path="client.name" placeholder="Nom du client *" value="${esc(d.client.name)}">
+  <select class="field" id="clientSelect" style="margin-top:9px"><option value="">Choisir un client existant…</option>${state.clients.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select>
+  <input class="field draft" data-path="client.phone" placeholder="Téléphone" value="${esc(d.client.phone)}" style="margin-top:9px">
+  <input class="field draft" data-path="client.email" placeholder="Email" value="${esc(d.client.email)}" style="margin-top:9px">
+  <textarea class="field draft" data-path="client.address" placeholder="Adresse du chantier" style="margin-top:9px">${esc(d.client.address)}</textarea>
+  <div class="label">Devis</div>
+  <input class="field draft" data-path="title" placeholder="Titre des travaux" value="${esc(d.title)}">
+  <textarea class="field draft" data-path="description" placeholder="Description (optionnel)" style="margin-top:9px">${esc(d.description)}</textarea>
+  <div class="toolbar">
+   <button class="btn ghost" onclick="saveDraftOnly()">💾 Enregistrer</button>
+   <button class="btn" onclick="goStep(2)">Suivant →</button>
+  </div>`;
+
+ if(d.step===2){
+  const tradeGroups=Object.entries(trades).map(([k,v])=>`<button class="filterChip${state.draft._filterTrade===k?' active':''}" onclick="setFilterTrade('${k}')">${v.icon} ${v.label}</button>`).join('');
+  const activeTrade=state.draft._filterTrade||state.trade;
+  const catalogue=state.servicesByTrade[activeTrade]||[];
+  return `
+  <div class="label">Ajouter une prestation</div>
+  <input class="field" id="serviceSearch" placeholder="🔎 Rechercher…">
+  <div class="filterRow" id="tradeFilter" style="margin-top:8px;overflow-x:auto;flex-wrap:nowrap">${tradeGroups}</div>
+  <div id="catalogueList" class="list" style="margin-top:10px">${catalogueListHTML(catalogue)}</div>
+  <button class="btn ghost" onclick="openServiceModal()" style="margin-top:10px">＋ Prestation personnalisée</button>
+  <div class="label">Prestations sélectionnées (${d.items.length})</div>
+  <div id="selectedList">${d.items.length?d.items.map((it,i)=>selectedItemHTML(it,i)).join(''):'<div class="empty">Aucune prestation. Ajoutez-en ci-dessus.</div>'}</div>
+  ${totalsHTML(d)}
+  <div class="toolbar">
+   <button class="btn ghost" onclick="goStep(1)">← Retour</button>
+   <button class="btn" onclick="goStep(3)">Suivant →</button>
+  </div>`;
+ }
+
+ return `
+  <div class="label">Récapitulatif</div>
+  ${pdfPreviewHTML(false)}
+  <textarea class="field draft" data-path="observations" placeholder="Observations / conditions particulières" style="margin-top:10px">${esc(d.observations)}</textarea>
+  <div class="toolbar">
+   <button class="btn ghost" onclick="goStep(2)">← Modifier</button>
+   <button class="btn" onclick="finalizeQuote()">✅ Générer le devis</button>
+  </div>
+  <button class="btn orange" onclick="downloadDraftPdf()" style="margin-top:8px">⬇ Aperçu PDF</button>`;
+}
+
+function catalogueListHTML(catalogue){
+ if(!catalogue||!catalogue.length)return '<div class="empty">Aucune prestation pour ce métier.</div>';
+ return catalogue.map(s=>`
+  <div class="item">
+   <div style="flex:1;min-width:0"><h4>${esc(s.name)}</h4><p>${esc(s.category)} · ${money(s.price)} / ${esc(s.unit)}</p></div>
+   <button class="btn small ghost" style="width:auto;padding:0 12px" onclick="addService('${s.id}','${(s._trade||state.draft._filterTrade||state.trade)}')">＋</button>
+  </div>`).join('')
+}
+
+function selectedItemHTML(it,i){return `
+ <div class="serviceRow">
+  <div class="serviceTop">
+   <div style="flex:1;min-width:0"><div class="serviceName">${esc(it.name)}</div><p style="margin:3px 0 0;color:#789;font-size:12px">${esc(it.category||'')} · ${esc(it.unit)}</p></div>
+   <div class="servicePrice">${money(it.qty*it.price)}</div>
+  </div>
+  <div class="qtyBox">
+   <button class="qtyBtn" onclick="changeQty(${i},-1)">−</button>
+   <span class="qtyVal">${it.qty}</span>
+   <button class="qtyBtn" onclick="changeQty(${i},1)">＋</button>
+   <span style="color:#789;font-size:12px;margin-left:4px">${money(it.price)} / ${esc(it.unit)}</span>
+  </div>
+  <div class="inlineActions">
+   <button onclick="editSelected(${i})">✏️ Modifier</button>
+   <button onclick="duplicateSelected(${i})">📋 Dupliquer</button>
+   <button class="red" onclick="removeSelected(${i})">🗑 Supprimer</button>
+  </div>
+ </div>`
+}
+
+function totals(d){
+ const ht=(d.items||[]).reduce((s,it)=>s+(Number(it.qty)||0)*(Number(it.price)||0),0);
+ const tva=ht*(Number(state.settings.vat)||0)/100;
+ return {ht,tva,ttc:ht+tva};
+}
+function totalsHTML(d){
+ const t=totals(d);
+ return `<div class="totalBox">
+  <div class="totalLine"><span>Total HT</span><b>${money(t.ht)}</b></div>
+  <div class="totalLine"><span>TVA ${state.settings.vat}%</span><b>${money(t.tva)}</b></div>
+  <div class="totalLine ttc"><span>Total TTC</span><b>${money(t.ttc)}</b></div>
+ </div>`;
+}
+
+function bindQuote(){
+ document.querySelectorAll('.draft').forEach(el=>el.oninput=e=>{setPath(state.draft,el.dataset.path,e.target.value);saveState()});
+ const cs=document.getElementById('clientSelect');
+ if(cs)cs.onchange=e=>{const c=state.clients.find(x=>x.id===e.target.value);if(c){state.draft.client={...c};saveState();render()}};
+ const ss=document.getElementById('serviceSearch');
+ if(ss)ss.oninput=e=>{
+  const q=e.target.value.toLowerCase();
+  const activeTrade=state.draft._filterTrade||state.trade;
+  const list=state.servicesByTrade[activeTrade]||[];
+  const filtered=q?list.filter(x=>x.name.toLowerCase().includes(q)||x.category.toLowerCase().includes(q)):list;
+  document.getElementById('catalogueList').innerHTML=catalogueListHTML(filtered)||(q?'<div class="empty">Aucun résultat.</div>':'');
+ };
+}
+
+/* ══════════════════════════════
+   QUOTE ACTIONS
+══════════════════════════════ */
+window.goStep=n=>{state.draft.step=n;render()};
+window.saveDraftOnly=()=>{saveState();toast('💾 Brouillon enregistré')};
+window.setFilterTrade=k=>{state.draft._filterTrade=k;render()};
+window.addService=(id,trade)=>{
+ const t=trade||state.draft._filterTrade||state.trade;
+ const s=(state.servicesByTrade[t]||[]).find(x=>x.id===id);
+ if(s){state.draft.items.push({...s,qty:1,id:uid(),_trade:t});saveState();render()}
+};
+window.changeQty=(i,n)=>{
+ const item=state.draft.items[i];
+ if(!item)return;
+ item.qty=Math.max(1,Number(item.qty||1)+n);
+ saveState();
+ // Update only the totals and the specific row without full re-render
+ const rowEl=document.querySelectorAll('.serviceRow')[i];
+ if(rowEl){
+  rowEl.querySelector('.qtyVal').textContent=item.qty;
+  rowEl.querySelector('.servicePrice').textContent=money(item.qty*item.price);
+ }
+ // Re-render totals
+ const tb=document.querySelector('.totalBox');
+ if(tb){const t=totals(state.draft);tb.innerHTML=`<div class="totalLine"><span>Total HT</span><b>${money(t.ht)}</b></div><div class="totalLine"><span>TVA ${state.settings.vat}%</span><b>${money(t.tva)}</b></div><div class="totalLine ttc"><span>Total TTC</span><b>${money(t.ttc)}</b></div>`}
+};
+window.removeSelected=i=>{state.draft.items.splice(i,1);saveState();render()};
+window.duplicateSelected=i=>{state.draft.items.splice(i+1,0,{...state.draft.items[i],id:uid()});saveState();render()};
+window.editSelected=i=>openServiceModal(state.draft.items[i],i);
+
+window.confirmReset=()=>{
+ modalWithHeader('Nouveau devis',`
+  <p>Cette action va effacer le brouillon en cours (client, prestations, notes).</p>
+  <p><b>Confirmer la réinitialisation ?</b></p>
+  <div class="toolbar">
+   <button class="btn ghost" onclick="closeModal()">Annuler</button>
+   <button class="btn danger" onclick="closeModal();resetDraft()">Réinitialiser</button>
+  </div>
+ `);
+}
+function resetDraft(){state.draft=blankDraft();saveState();render();toast('✅ Nouveau devis prêt')}
+window.resetDraft=resetDraft;
+
+/* ══════════════════════════════
+   PDF PREVIEW HTML
+══════════════════════════════ */
+function pdfPreviewHTML(onboard){
+ const d=state.draft||blankDraft();
+ const c=state.company;
+ const t=theme();
+ const items=d.items.length?d.items:(onboard?makeCatalogue(state.trade).slice(0,3):[]);
+ const cats={};
+ items.forEach(it=>(cats[it.category||'PRESTATIONS']??=[]).push(it));
+ const docLabel=d.type==='facture'?'FACTURE':'DEVIS';
+ const mentions=state.settings.mentions||'Devis établi sur estimation visuelle. Valable selon la durée indiquée.';
+ return `<div class="pdfPreview">
+  <div class="pdfHead">
+   <div style="display:flex;gap:9px;align-items:flex-start;flex:1;min-width:0">
+    <div class="pdfLogo">${t.icon}</div>
+    <div style="min-width:0">
+     <b>${esc(c.name||'VOTRE ENTREPRISE')}</b><br>
+     <span style="color:var(--primary);font-weight:900;font-size:11px">${esc(t.subtitle.toUpperCase())}</span><br>
+     ${c.address?`<small style="color:#789">${esc(c.address)}</small><br>`:''}
+     <small>${[c.phone,c.email].filter(Boolean).map(esc).join(' · ')||'<span style="color:#aaa">Coordonnées à renseigner dans Profil</span>'}</small>
+     ${c.siret?`<br><small style="color:#789">SIRET : ${esc(c.siret)}</small>`:''}
+    </div>
+   </div>
+   <div class="pdfTitle">${docLabel}</div>
+  </div>
+  <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:11px;flex-wrap:wrap;gap:6px">
+   <div>
+    <b>Client :</b> ${esc(d.client?.name||'—')}<br>
+    ${d.client?.address?`<small style="color:#789">${esc(d.client.address)}</small><br>`:''}
+    ${d.client?.phone?`📞 ${esc(d.client.phone)}`:''}
+   </div>
+   <div style="text-align:right">
+    <b>N° :</b> ${esc(d.number||'—')}<br>
+    <b>Date :</b> ${new Date(d.date||today()).toLocaleDateString('fr-FR')}<br>
+    <b>Validité :</b> ${d.validity||30} jours
+   </div>
+  </div>
+  ${d.title?`<b style="font-size:13px">${esc(d.title).toUpperCase()}</b>`:''}
+  ${d.description?`<p style="margin:4px 0;color:#556;font-size:11px">${esc(d.description)}</p>`:''}
+  ${items.length?`<table class="miniTable">
+   <thead><tr><th>DÉSIGNATION</th><th>QTÉ</th><th>TOTAL HT</th></tr></thead>
+   <tbody>${Object.entries(cats).map(([cat,arr])=>`<tr class="catRow"><td colspan="3">${esc(cat)}</td></tr>${arr.map(it=>`<tr><td>${esc(it.name)}</td><td style="text-align:right">${it.qty}</td><td style="text-align:right">${money(it.qty*it.price)}</td></tr>`).join('')}`).join('')}</tbody>
+  </table>
+  ${totalsHTML({items})}
+  <div class="mentionsPreview"><b>Mentions :</b> ${esc(mentions)}</div>
+  `:'<p style="color:#aaa;text-align:center;padding:12px">Ajoutez des prestations pour voir l\'aperçu</p>'}
+ </div>`;
+}
+
+/* ══════════════════════════════
+   FINALIZE / SUCCESS
+══════════════════════════════ */
+function createQuoteFromDraft(){
+ const d=state.draft;
+ const t=totals(d);
+ const q={...JSON.parse(JSON.stringify(d)),id:uid(),date:d.date||today(),status:'En attente',type:'devis',trade:state.trade,totalHT:t.ht,totalTVA:t.tva,totalTTC:t.ttc};
+ delete q._filterTrade;
+ state.quotes.push(q);
+ if(q.client.name&&!state.clients.some(c=>c.name.toLowerCase()===q.client.name.toLowerCase())){
+  state.clients.push({id:uid(),name:q.client.name,phone:q.client.phone,email:q.client.email,address:q.client.address});
+ }
+ state.draft=null;
+ saveState();
+ return q;
+}
+window.finalizeQuote=()=>{
+ const d=state.draft;
+ if(!d.items.length){toast('⚠️ Ajoutez au moins une prestation');return}
+ const q=createQuoteFromDraft();
+ successPage(q);
+};
+function successPage(q){
+ shell('Devis généré',`
+  <div class="successView">
+   <div class="check">✓</div>
+   <h2>Devis créé !</h2>
+   <p style="color:#789">${q.number} · ${money(q.totalTTC)} TTC</p>
+   <div style="display:grid;gap:10px;margin-top:16px;text-align:left;max-width:340px;margin-inline:auto">
+    <button class="btn" onclick="openQuote('${q.id}')">📄 Voir le devis</button>
+    <button class="btn ghost" onclick="downloadPdf('${q.id}')">⬇ Télécharger PDF</button>
+    <button class="btn ghost" onclick="shareQuote('${q.id}')">📤 Partager (WhatsApp / autre)</button>
+    <button class="btn ghost" onclick="emailQuote('${q.id}')">✉️ Envoyer par email</button>
+    <button class="btn ghost" onclick="markQuote('${q.id}','Accepté');openQuote('${q.id}')">✅ Marquer accepté</button>
+    <button class="btn danger" onclick="newQuote()">＋ Nouveau devis</button>
+   </div>
+  </div>
+ `);
+}
+
+/* ══════════════════════════════
+   QUOTE DETAIL
+══════════════════════════════ */
+window.openQuote=id=>{
+ const q=state.quotes.find(x=>x.id===id);
+ if(!q)return;
+ const isFacture=q.type==='facture';
+ shell(q.number,`
+  ${pdfDocHTML(q)}
+  <div class="toolbar noPrint" style="margin-top:12px">
+   <button class="btn small" onclick="downloadPdf('${q.id}')">⬇ PDF</button>
+   <button class="btn small ghost" onclick="shareQuote('${q.id}')">📤 Partager</button>
+  </div>
+  <div class="toolbar noPrint">
+   ${q.status!=='Accepté'&&q.status!=='Payé'&&!isFacture?`<button class="btn small ghost" onclick="markQuote('${q.id}','Accepté');openQuote('${q.id}')">✅ Accepté</button>`:''}
+   ${!isFacture?`<button class="btn small orange" onclick="confirmMakeInvoice('${q.id}')">📋 Générer facture</button>`:''}
+   ${q.status!=='Payé'?`<button class="btn small success" onclick="markQuote('${q.id}','Payé');openQuote('${q.id}')">💰 Marquer payé</button>`:'<span class="badge paid" style="padding:10px 14px">💰 PAYÉ</span>'}
+  </div>
+  <div class="toolbar noPrint">
+   <button class="btn small ghost" onclick="emailQuote('${q.id}')">✉️ Email</button>
+   <button class="btn small danger" onclick="confirmDeleteQuote('${q.id}')">🗑 Supprimer</button>
+  </div>
+ `);
+};
+function pdfDocHTML(q){
+ const saved=state.draft;
+ state.draft=q;
+ const html=pdfPreviewHTML(false);
+ state.draft=saved;
+ return html;
+}
+window.confirmMakeInvoice=id=>{
+ modalWithHeader('Générer une facture',`
+  <p>Transformer ce devis en facture ?</p>
+  <p>Un nouveau document <b>FACTURE</b> sera créé avec un numéro FAC.</p>
+  <div class="toolbar">
+   <button class="btn ghost" onclick="closeModal()">Annuler</button>
+   <button class="btn orange" onclick="closeModal();makeInvoice('${id}')">Générer la facture</button>
+  </div>
+ `);
+};
+window.makeInvoice=id=>{
+ const q=state.quotes.find(x=>x.id===id);
+ if(!q)return;
+ const fac={...JSON.parse(JSON.stringify(q)),id:uid(),number:q.number.replace(/^DEV/,'FAC'),type:'facture',status:'Facturé',date:today()};
+ state.quotes.push(fac);
+ saveState();
+ toast('📋 Facture créée : '+fac.number);
+ openQuote(fac.id);
+};
+window.markQuote=(id,status)=>{const q=state.quotes.find(x=>x.id===id);if(q){q.status=status;saveState();toast('Statut : '+status)}};
+window.confirmDeleteQuote=id=>{
+ modalWithHeader('Supprimer',`
+  <p>Supprimer définitivement ce document ?</p>
+  <div class="toolbar">
+   <button class="btn ghost" onclick="closeModal()">Annuler</button>
+   <button class="btn danger" onclick="closeModal();deleteQuote('${id}')">Supprimer</button>
+  </div>
+ `);
+};
+window.deleteQuote=id=>{state.quotes=state.quotes.filter(x=>x.id!==id);saveState();state.activeTab='track';render();toast('Supprimé')};
+
+/* ══════════════════════════════
+   CLIENTS PAGE
+══════════════════════════════ */
+function clientsPage(){
+ shell('Clients',`
+  <h1 class="pageTitle">Clients</h1>
+  <button class="btn" onclick="openClientModal()" style="margin-bottom:14px">＋ Ajouter un client</button>
+  <div class="list">${state.clients.map(c=>clientItem(c)).join('')||'<div class="empty">Aucun client enregistré.<br><br>Ils sont ajoutés automatiquement lors de la création d\'un devis.</div>'}</div>
+ `);
+}
+function clientItem(c){
+ return `<div class="item" style="cursor:pointer;display:flex;flex-direction:column;align-items:stretch;gap:0" onclick="openClientDetail('${c.id}')">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+   <div><h4>${esc(c.name||'Client')}</h4><p>${[c.phone,c.email].filter(Boolean).map(esc).join(' · ')||'Aucune coordonnée'}</p></div>
+   <span style="color:#aaa;font-size:18px">›</span>
+  </div>
+ </div>`;
+}
+window.openClientDetail=id=>{
+ const c=state.clients.find(x=>x.id===id);
+ if(!c)return;
+ const clientQuotes=state.quotes.filter(q=>q.client&&q.client.name&&q.client.name.toLowerCase()===c.name.toLowerCase());
+ modalWithHeader(c.name||'Client',`
+  <div class="clientDetail" style="margin-bottom:14px">
+   ${c.phone?`<div class="clientDetailRow"><span>📞 Téléphone</span><a href="tel:${esc(c.phone)}">${esc(c.phone)}</a></div>`:''}
+   ${c.email?`<div class="clientDetailRow"><span>✉️ Email</span><a href="mailto:${esc(c.email)}">${esc(c.email)}</a></div>`:''}
+   ${c.address?`<div class="clientDetailRow"><span>📍 Adresse</span><span>${esc(c.address)}</span></div>`:''}
+  </div>
+  <p style="font-weight:900;font-size:13px;margin:0 0 8px">Devis / factures (${clientQuotes.length})</p>
+  <div class="list" style="max-height:180px;overflow-y:auto">${clientQuotes.slice().reverse().map(q=>`<div class="item" onclick="closeModal();openQuote('${q.id}')"><div><h4>${esc(q.number)}</h4><p>${new Date(q.date).toLocaleDateString('fr-FR')}</p></div><div style="text-align:right"><b>${money(q.totalTTC)}</b><br><span class="badge ${q.status==='Payé'?'paid':q.status==='Accepté'?'ok':'wait'}">${q.status}</span></div></div>`).join('')||'<div class="empty">Aucun devis pour ce client.</div>'}</div>
+  <div class="toolbar" style="margin-top:14px">
+   <button class="btn ghost" onclick="closeModal();useClientInQuote('${id}')">＋ Nouveau devis</button>
+   <button class="btn ghost" onclick="closeModal();editClient('${id}')">✏️ Modifier</button>
+  </div>
+  <button class="btn danger" onclick="closeModal();confirmDeleteClient('${id}')" style="margin-top:6px">🗑 Supprimer ce client</button>
+ `);
+};
+window.useClientInQuote=id=>{
+ const c=state.clients.find(x=>x.id===id);
+ if(!c)return;
+ state.draft=blankDraft();
+ state.draft.client={name:c.name,phone:c.phone||'',email:c.email||'',address:c.address||''};
+ state.activeTab='quote';
+ render();
+};
+window.editClient=id=>{
+ const c=state.clients.find(x=>x.id===id);
+ if(!c)return;
+ modalWithHeader('Modifier client',`
+  <input class="field" id="clName" placeholder="Nom" value="${esc(c.name)}">
+  <input class="field" id="clPhone" placeholder="Téléphone" value="${esc(c.phone||'')}" style="margin-top:9px">
+  <input class="field" id="clEmail" placeholder="Email" value="${esc(c.email||'')}" style="margin-top:9px">
+  <textarea class="field" id="clAddr" placeholder="Adresse" style="margin-top:9px">${esc(c.address||'')}</textarea>
+  <div class="toolbar" style="margin-top:14px">
+   <button class="btn ghost" onclick="closeModal()">Annuler</button>
+   <button class="btn" onclick="saveEditClient('${id}')">Enregistrer</button>
+  </div>
+ `);
+};
+window.saveEditClient=id=>{
+ const c=state.clients.find(x=>x.id===id);
+ if(!c)return;
+ c.name=val('clName');c.phone=val('clPhone');c.email=val('clEmail');c.address=val('clAddr');
+ saveState();closeModal();render();toast('Client mis à jour');
+};
+window.confirmDeleteClient=id=>{
+ modalWithHeader('Supprimer client',`
+  <p>Supprimer ce client ? Ses devis ne seront pas supprimés.</p>
+  <div class="toolbar">
+   <button class="btn ghost" onclick="closeModal()">Annuler</button>
+   <button class="btn danger" onclick="closeModal();deleteClient('${id}')">Supprimer</button>
+  </div>
+ `);
+};
+window.deleteClient=id=>{state.clients=state.clients.filter(x=>x.id!==id);saveState();render();toast('Client supprimé')};
+
+function openClientModal(){
+ modalWithHeader('Ajouter un client',`
+  <input class="field" id="clName" placeholder="Nom *">
+  <input class="field" id="clPhone" placeholder="Téléphone" style="margin-top:9px">
+  <input class="field" id="clEmail" placeholder="Email" style="margin-top:9px">
+  <textarea class="field" id="clAddr" placeholder="Adresse" style="margin-top:9px"></textarea>
+  <div class="toolbar" style="margin-top:14px">
+   <button class="btn ghost" onclick="closeModal()">Annuler</button>
+   <button class="btn" onclick="saveNewClient()">Enregistrer</button>
+  </div>
+ `);
+}
+window.openClientModal=openClientModal;
+window.saveNewClient=()=>{
+ const name=val('clName');
+ if(!name.trim()){toast('⚠️ Indiquez un nom');return}
+ state.clients.push({id:uid(),name,phone:val('clPhone'),email:val('clEmail'),address:val('clAddr')});
+ saveState();closeModal();render();toast('Client ajouté');
+};
+// Keep old saveClient alias
+window.saveClient=window.saveNewClient;
+
+/* ══════════════════════════════
+   TRACK PAGE
+══════════════════════════════ */
+function trackPage(){
+ const filters=['Tous','En attente','Accepté','Facturé','Payé','Brouillon'];
+ const active=state._trackFilter||'Tous';
+ const list=state.quotes.filter(q=>active==='Tous'||q.status===active).slice().reverse();
+ shell('Suivi',`
+  <h1 class="pageTitle">Suivi activité</h1>
+  <div class="filterRow">${filters.map(f=>`<button class="filterChip${active===f?' active':''}" onclick="setTrackFilter('${f}')">${f}</button>`).join('')}</div>
+  <div class="toolbar">
+   <button class="btn small ghost" onclick="exportData()">📤 Exporter</button>
+   <button class="btn small ghost" onclick="document.getElementById('importFile').click()">📥 Importer</button>
+   <input id="importFile" type="file" accept="application/json" class="hidden" onchange="importData(event)">
+  </div>
+  <div class="list">${list.map(quoteItem).join('')||(active!=='Tous'?'<div class="empty">Aucun document avec ce statut.</div>':'<div class="empty">Aucun document.</div>')}</div>
+ `);
+}
+window.setTrackFilter=f=>{state._trackFilter=f;render()};
+
+/* ══════════════════════════════
+   PROFILE PAGE
+══════════════════════════════ */
+function profilePage(){
+ const c=state.company;
+ shell('Profil',`
+  <h1 class="pageTitle">Profil</h1>
+  <p class="sub">Informations optionnelles — modifiables à tout moment.</p>
+  <div class="card" style="padding:15px">
+   <div class="label">Métier principal</div>
+   <select class="field" id="tradeSelect">${Object.entries(trades).map(([k,v])=>`<option value="${k}"${state.trade===k?' selected':''}>${v.icon} ${v.label}</option>`).join('')}</select>
+   <div class="label">Entreprise</div>
+   <input class="field prof" data-k="name" placeholder="🏢 Nom entreprise" value="${esc(c.name)}" style="margin-top:6px">
+   <input class="field prof" data-k="firstName" placeholder="👤 Prénom" value="${esc(c.firstName)}" style="margin-top:9px">
+   <input class="field prof" data-k="phone" placeholder="📞 Téléphone" value="${esc(c.phone)}" style="margin-top:9px">
+   <input class="field prof" data-k="email" placeholder="✉️ Email" value="${esc(c.email)}" style="margin-top:9px">
+   <textarea class="field prof" data-k="address" placeholder="📍 Adresse" style="margin-top:9px">${esc(c.address)}</textarea>
+   <input class="field prof" data-k="siret" placeholder="SIRET" value="${esc(c.siret)}" style="margin-top:9px">
+   <input class="field prof" data-k="insurance" placeholder="Assurance décennale" value="${esc(c.insurance)}" style="margin-top:9px">
+   <div class="label">Paramètres devis</div>
+   <div class="grid2">
+    <div><label class="label" style="margin-top:0">TVA %</label><input class="field" id="vat" type="number" value="${state.settings.vat}"></div>
+    <div><label class="label" style="margin-top:0">Validité (jours)</label><input class="field" id="validity" type="number" value="${state.settings.validity}"></div>
+   </div>
+   <div class="label">Mentions de protection</div>
+   <textarea class="field" id="mentions" rows="4">${esc(state.settings.mentions)}</textarea>
+   <button class="btn" onclick="saveProfile()" style="margin-top:14px">💾 Enregistrer le profil</button>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin:18px 0 8px">
+   <h3 style="margin:0">Prestations du métier</h3>
+   <button class="btn small ghost" style="width:auto;padding:0 14px" onclick="openServiceModal(null,null,true)">＋ Ajouter</button>
+  </div>
+  <div class="list">${state.servicesByTrade[state.trade].map(s=>`<div class="item"><div style="flex:1;min-width:0"><h4>${esc(s.name)}</h4><p>${esc(s.category)} · ${money(s.price)} / ${esc(s.unit)}</p></div><button class="btn small ghost" style="width:auto;padding:0 12px;flex-shrink:0" onclick="openServiceModalById('${s.id}')">✏️</button></div>`).join('')}</div>
+ `);
+ document.getElementById('tradeSelect').onchange=e=>{state.trade=e.target.value;saveState();render()};
+ document.querySelectorAll('.prof').forEach(i=>i.oninput=e=>state.company[i.dataset.k]=e.target.value);
+}
+window.saveProfile=()=>{
+ document.querySelectorAll('.prof').forEach(i=>state.company[i.dataset.k]=i.value);
+ state.settings.vat=Number(val('vat'))||0;
+ state.settings.validity=Number(val('validity'))||30;
+ state.settings.mentions=val('mentions');
+ saveState();toast('✅ Profil enregistré');render();
+};
+
+/* ══════════════════════════════
+   SERVICE MODAL
+══════════════════════════════ */
+function openServiceModal(item=null,index=null,toCatalog=false){
+ const it=item||{name:'',qty:1,unit:'forfait',price:0,category:'PRESTATION'};
+ const units=['forfait','u','m²','ml','lot','h','jour','semaine'];
+ modalWithHeader(item?'Modifier la prestation':'Nouvelle prestation',`
+  <input class="field" id="mName" placeholder="Intitulé de la prestation" value="${esc(it.name)}">
+  <div class="grid2" style="margin-top:9px">
+   <div>
+    <div class="label" style="margin-top:0">Quantité</div>
+    <input class="field" id="mQty" type="number" min="1" step="1" placeholder="Qté" value="${it.qty||1}">
+   </div>
+   <div>
+    <div class="label" style="margin-top:0">Unité</div>
+    <select class="field" id="mUnit">${units.map(u=>`<option${it.unit===u?' selected':''}>${u}</option>`).join('')}</select>
+   </div>
+  </div>
+  <div class="label">Prix unitaire HT (€)</div>
+  <input class="field" id="mPrice" type="number" step="0.01" placeholder="0.00" value="${it.price||0}">
+  <div class="label">Catégorie</div>
+  <input class="field" id="mCat" placeholder="Ex : MAIN D'ŒUVRE" value="${esc(it.category||'PRESTATION')}">
+  <div class="toolbar" style="margin-top:14px">
+   <button class="btn ghost" onclick="closeModal()">Annuler</button>
+   <button class="btn" id="saveService">Enregistrer</button>
+  </div>
+ `);
+ document.getElementById('saveService').onclick=()=>{
+  const obj={id:it.id||uid(),name:val('mName')||'Prestation',qty:Math.max(1,Number(val('mQty'))||1),unit:val('mUnit'),price:Number(val('mPrice'))||0,category:val('mCat')||'PRESTATION'};
+  if(index!==null&&state.draft){state.draft.items[index]=obj}
+  else if(toCatalog){state.servicesByTrade[state.trade].push(obj)}
+  else if(state.draft){state.draft.items.push(obj)}
+  saveState();closeModal();render();
+ };
+}
+window.openServiceModal=openServiceModal;
+window.openServiceModalById=id=>{
+ const arr=state.servicesByTrade[state.trade];
+ const i=arr.findIndex(x=>x.id===id);
+ if(i<0)return;
+ openServiceModal(arr[i],null,true);
+ setTimeout(()=>{
+  const btn=document.getElementById('saveService');
+  if(btn)btn.onclick=()=>{
+   arr[i]={id,name:val('mName')||'Prestation',qty:Math.max(1,Number(val('mQty'))||1),unit:val('mUnit'),price:Number(val('mPrice'))||0,category:val('mCat')||'PRESTATION'};
+   saveState();closeModal();render();toast('Prestation mise à jour');
+  };
+ },50);
+};
+
+/* ══════════════════════════════
+   TRADE MODAL
+══════════════════════════════ */
+function openTradeModal(){
+ modalWithHeader('Votre métier',`
+  <p style="color:#789;font-size:13px">Entrez votre métier. Il sera utilisé comme "Autre métier".</p>
+  <input id="customTradeName" class="field" placeholder="Ex : Serrurier, décorateur, coach…">
+  <div class="toolbar" style="margin-top:12px">
+   <button class="btn ghost" onclick="closeModal()">Annuler</button>
+   <button class="btn" onclick="addCustomTrade()">Utiliser ce métier</button>
+  </div>
+ `);
+}
+window.addCustomTrade=()=>{
+ const name=val('customTradeName')||'Autre métier';
+ trades.autre.label=name;
+ state.trade='autre';
+ closeModal();renderOnboarding();
+};
+
+/* ══════════════════════════════
+   QUICK MENU
+══════════════════════════════ */
+window.openQuickMenu=()=>{
+ modalWithHeader('Menu rapide',`
+  <div style="display:grid;gap:8px">
+   <button class="btn" onclick="closeModal();newQuote()">＋ Nouveau devis</button>
+   <button class="btn ghost" onclick="closeModal();demoQuote()">🎯 Charger la démo</button>
+   <button class="btn ghost" onclick="closeModal();state.activeTab='track';render()">📊 Voir le suivi</button>
+   <button class="btn ghost" onclick="closeModal();exportData()">📤 Exporter mes données</button>
+   <button class="btn danger" onclick="confirmResetAll()">⚠️ Réinitialiser l'application</button>
+  </div>
+ `);
+};
+window.confirmResetAll=()=>{
+ closeModal();
+ modalWithHeader('⚠️ Réinitialiser',`
+  <p><b>Toutes vos données seront effacées</b> (devis, clients, profil).</p>
+  <p>Cette action est irréversible.</p>
+  <div class="toolbar">
+   <button class="btn ghost" onclick="closeModal()">Annuler</button>
+   <button class="btn danger" onclick="closeModal();fullReset()">Tout effacer</button>
+  </div>
+ `);
+};
+window.fullReset=()=>{localStorage.removeItem(LS);location.reload()};
+
+/* ══════════════════════════════
+   PDF GENERATION
+══════════════════════════════ */
+function hexRgb(h){h=h.replace('#','');return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]}
+
+function jsPdfQuote(q){
+ if(typeof window.jspdf==='undefined'){toast('⚠️ Bibliothèque PDF non chargée');return null}
+ const {jsPDF}=window.jspdf;
+ const doc=new jsPDF('p','mm','a4');
+ const t=theme(q.trade);
+ const c=state.company;
+ const pColor=hexRgb(t.primary);
+ const aColor=hexRgb(t.accent);
+
+ // Header background
+ doc.setFillColor(...pColor);
+ doc.rect(0,0,210,36,'F');
+ doc.setTextColor(255,255,255);
+ doc.setFont('helvetica','bold');
+ doc.setFontSize(18);
+ doc.text(c.name||'VOTRE ENTREPRISE',14,13);
+ doc.setFontSize(10);
+ doc.setFont('helvetica','normal');
+ doc.text(t.subtitle.toUpperCase(),14,19);
+ const infos=[c.address,c.phone,c.email,c.siret?'SIRET : '+c.siret:'',c.insurance?'Assur. : '+c.insurance:''].filter(Boolean);
+ infos.forEach((l,i)=>doc.text(String(l),14,24+i*4));
+
+ // Doc type badge
+ doc.setFillColor(...aColor);
+ doc.roundedRect(148,8,52,18,3,3,'F');
+ doc.setTextColor(10,20,40);
+ doc.setFont('helvetica','bold');
+ doc.setFontSize(16);
+ doc.text(q.type==='facture'?'FACTURE':'DEVIS',174,19.5,{align:'center'});
+
+ // Info block
+ let y=42;
+ doc.setTextColor(11,31,68);
+ doc.setFillColor(242,246,255);
+ doc.roundedRect(130,y,70,30,2,2,'F');
+ doc.setFontSize(8.5);
+ [['N° :',q.number],['Date :',new Date(q.date).toLocaleDateString('fr-FR')],['Validité :',q.validity+' jours'],['Client :',q.client?.name||'-'],['Tél. :',q.client?.phone||'-']].forEach(([k,v],i)=>{
+  doc.setFont('helvetica','bold');doc.text(k,133,y+6+i*4.8);
+  doc.setFont('helvetica','normal');doc.text(String(v||'-').slice(0,28),148,y+6+i*4.8);
+ });
+
+ // Client block
+ doc.setFont('helvetica','bold');doc.setFontSize(9);
+ doc.text('CLIENT :',14,y+6);
+ doc.setFont('helvetica','normal');
+ doc.text(q.client?.name||'—',14,y+11);
+ if(q.client?.address)doc.text(doc.splitTextToSize(q.client.address,60),14,y+16);
+ if(q.client?.email)doc.text(q.client.email,14,y+26);
+
+ y+=36;
+ // Title bar
+ doc.setFillColor(...pColor);
+ doc.roundedRect(10,y,190,9,2,2,'F');
+ doc.setTextColor(255,255,255);
+ doc.setFont('helvetica','bold');doc.setFontSize(11);
+ doc.text((q.title||t.label).toUpperCase().slice(0,70),14,y+6.5);
+
+ y+=14;
+ if(q.description){
+  doc.setTextColor(60,70,90);doc.setFont('helvetica','normal');doc.setFontSize(9);
+  doc.text(doc.splitTextToSize(q.description,170),14,y);y+=10;
+ }
+
+ // Table header
+ doc.setFillColor(...pColor);
+ doc.setTextColor(255,255,255);
+ doc.setFont('helvetica','bold');doc.setFontSize(9);
+ doc.rect(10,y,105,8,'F');doc.rect(115,y,28,8,'F');doc.rect(143,y,30,8,'F');doc.rect(173,y,27,8,'F');
+ doc.text('DÉSIGNATION',62,y+5.5,{align:'center'});
+ doc.text('QTÉ',129,y+5.5,{align:'center'});
+ doc.text('PU HT',158,y+5.5,{align:'center'});
+ doc.text('TOTAL HT',186,y+5.5,{align:'center'});
+ y+=8;
+
+ // Rows
+ const cats={};
+ (q.items||[]).forEach(it=>(cats[it.category||'PRESTATIONS']??=[]).push(it));
+ doc.setFontSize(8.5);
+ Object.entries(cats).forEach(([cat,arr])=>{
+  if(y>255){doc.addPage();y=15}
+  doc.setFillColor(235,242,255);
+  doc.setTextColor(...pColor);
+  doc.setFont('helvetica','bold');
+  doc.rect(10,y,190,7,'F');
+  doc.text(cat,13,y+5);y+=7;
+  doc.setFont('helvetica','normal');
+  doc.setTextColor(11,31,68);
+  arr.forEach(it=>{
+   if(y>263){doc.addPage();y=15}
+   doc.setDrawColor(210,220,235);
+   doc.rect(10,y,105,7);doc.rect(115,y,28,7);doc.rect(143,y,30,7);doc.rect(173,y,27,7);
+   doc.text(String(it.name).slice(0,55),13,y+5);
+   doc.text(String(it.qty),129,y+5,{align:'center'});
+   doc.text(pdfMoney(it.price),169,y+5,{align:'right'});
+   doc.text(pdfMoney(it.qty*it.price),197,y+5,{align:'right'});
+   y+=7;
+  });
+ });
+
+ // Totals
+ y+=4;
+ [['TOTAL HT',q.totalHT,false],['TVA '+state.settings.vat+'%',q.totalTVA,false],['TOTAL TTC',q.totalTTC,true]].forEach(([label,amt,highlight])=>{
+  if(highlight){doc.setFillColor(...aColor)}else{doc.setFillColor(...pColor)}
+  doc.setTextColor(255,255,255);
+  doc.rect(130,y,40,9,'F');
+  doc.setFont('helvetica','bold');doc.setFontSize(9);
+  doc.text(label,132,y+6);
+  doc.setTextColor(11,31,68);
+  doc.setDrawColor(210,220,235);
+  doc.rect(170,y,30,9);
+  doc.text(pdfMoney(amt),197,y+6,{align:'right'});
+  y+=9;
+ });
+
+ // Observations + mentions
+ y+=8;
+ if(y<250){
+  doc.setDrawColor(200,215,240);
+  if(q.observations){
+   doc.roundedRect(10,y,88,30,2,2);
+   doc.setTextColor(11,31,68);doc.setFont('helvetica','bold');doc.setFontSize(8);
+   doc.text('OBSERVATIONS',14,y+7);
+   doc.setFont('helvetica','normal');
+   doc.text(doc.splitTextToSize(q.observations,78),14,y+13);
+  }
+  const m=state.settings.mentions||'Devis établi sur estimation visuelle. Valable selon la durée indiquée.';
+  doc.roundedRect(q.observations?103:10,y,q.observations?97:190,30,2,2);
+  doc.setTextColor(11,31,68);doc.setFont('helvetica','bold');doc.setFontSize(8);
+  doc.text('MENTIONS DE PROTECTION',q.observations?107:14,y+7);
+  doc.setFont('helvetica','normal');
+  doc.text(doc.splitTextToSize(m,q.observations?86:178),q.observations?107:14,y+13);
+ }
+
+ doc.setFont('helvetica','italic');
+ doc.setTextColor(...pColor);
+ doc.setFontSize(9);
+ doc.text('Merci pour votre confiance – DevisExpress',105,290,{align:'center'});
+ return doc;
+}
+
+window.downloadDraftPdf=()=>{
+ if(!state.draft){toast('⚠️ Aucun brouillon');return}
+ const t=totals(state.draft);
+ const q={...JSON.parse(JSON.stringify(state.draft)),trade:state.trade,totalHT:t.ht,totalTVA:t.tva,totalTTC:t.ttc};
+ const doc=jsPdfQuote(q);
+ if(doc)document.fonts?document.fonts.ready.then(()=>doc.save((q.number||'devis')+'.pdf')):doc.save((q.number||'devis')+'.pdf');
+};
+
+window.downloadPdf=id=>{
+ const q=state.quotes.find(x=>x.id===id);
+ if(!q){toast('⚠️ Devis introuvable');return}
+ const doc=jsPdfQuote(q);
+ if(doc)document.fonts?document.fonts.ready.then(()=>doc.save(q.number+'.pdf')):doc.save(q.number+'.pdf');
+};
+
+/* ══════════════════════════════
+   SHARE
+══════════════════════════════ */
+window.shareQuote=async id=>{
+ const q=state.quotes.find(x=>x.id===id);
+ if(!q){toast('⚠️ Devis introuvable');return}
+ const text=`Bonjour ${q.client?.name||''},\nVeuillez trouver ci-joint votre ${q.type==='facture'?'facture':'devis'} ${q.number} d'un montant de ${money(q.totalTTC)} TTC.\n${state.company.name?'\n'+state.company.name:''}${state.company.phone?'\n'+state.company.phone:''}`;
+ const doc=jsPdfQuote(q);
+ if(!doc){toast('⚠️ Erreur PDF');return}
+ try{
+  const blob=doc.output('blob');
+  const file=new File([blob],q.number+'.pdf',{type:'application/pdf'});
+  if(navigator.canShare&&navigator.canShare({files:[file]})){
+   await navigator.share({title:q.number,text,files:[file]});
+   return;
+  }
+ }catch(e){}
+ // Fallback: download PDF + open WhatsApp
+ try{doc.save(q.number+'.pdf')}catch(e){}
+ toast('PDF téléchargé. Partagez-le depuis vos fichiers.');
+ setTimeout(()=>window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank'),800);
+};
+
+window.emailQuote=id=>{
+ const q=state.quotes.find(x=>x.id===id);
+ if(!q)return;
+ const body=`Bonjour ${q.client?.name||''},\n\nVeuillez trouver ci-joint votre ${q.type==='facture'?'facture':'devis'} ${q.number} d'un montant de ${money(q.totalTTC)} TTC.\n\nPour télécharger le PDF, ouvrez l'application DevisExpress.\n\nCordialement,\n${state.company.name||state.company.firstName||''}`;
+ location.href=`mailto:${encodeURIComponent(q.client?.email||'')}?subject=${encodeURIComponent((q.type==='facture'?'Facture':'Devis')+' '+q.number)}&body=${encodeURIComponent(body)}`;
+};
+
+/* ══════════════════════════════
+   EXPORT / IMPORT
+══════════════════════════════ */
+window.exportData=()=>{
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(new Blob([JSON.stringify(state,null,2)],{type:'application/json'}));
+ a.download='devisexpress-sauvegarde-'+today()+'.json';
+ a.click();
+ toast('📤 Export téléchargé');
+};
+window.importData=e=>{
+ const f=e.target.files[0];if(!f)return;
+ const r=new FileReader();
+ r.onload=()=>{try{state=JSON.parse(r.result);saveState();render();toast('📥 Import réussi')}catch(err){alert('Fichier invalide')}};
+ r.readAsText(f);
+};
+
+/* ══════════════════════════════
+   DEMO
+══════════════════════════════ */
+function demoQuote(){
+ state.draft=blankDraft();
+ state.draft.client={name:'M. Dupont',phone:'06 12 34 56 78',email:'dupont@email.fr',address:'123 Rue des Lilas, 75010 Paris'};
+ state.draft.title=theme().label+' – Rénovation complète';
+ state.draft.description='Travaux de rénovation selon plans validés.';
+ state.draft.items=makeCatalogue(state.trade).slice(0,5);
+ state.draft.step=3;
+ state.activeTab='quote';
+ render();
+}
+window.demoQuote=demoQuote;
+
+/* ══════════════════════════════
+   TOAST
+══════════════════════════════ */
+function toast(msg){
+ document.querySelectorAll('.toast').forEach(e=>e.remove());
+ const d=document.createElement('div');
+ d.className='toast';
+ d.textContent=msg;
+ d.style.cssText='position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#0b1f44;color:#fff;padding:10px 18px;border-radius:999px;z-index:999;font-weight:800;font-size:14px;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.25)';
+ document.body.appendChild(d);
+ setTimeout(()=>d.style.cssText+=';transition:opacity .4s;opacity:0',1400);
+ setTimeout(()=>d.remove(),1900);
+}
+
+/* ══════════════════════════════
+   BOOT
+══════════════════════════════ */
+window.render();
 })();
 </script>
 </body>
