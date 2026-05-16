@@ -375,9 +375,15 @@ let state=loadState()||{
 };
 if(!state.servicesByTrade)state.servicesByTrade={};
 if(!state.trackView)state.trackView='liste';
+if(!state.company)state.company={name:'',firstName:'',phone:'',email:'',address:'',siret:'',insurance:'',logo:''};
+if(!state.quotes)state.quotes=[];
+if(!state.clients)state.clients=[];
+if(!state.settings)state.settings={vat:10,validity:30,mentions:''};
 Object.keys(trades).forEach(k=>{if(!state.servicesByTrade[k])state.servicesByTrade[k]=catalogue(k);});
+// Expose state globally so inline onclick handlers can access it
+window.state=state;
 
-function saveState(){localStorage.setItem(LS,JSON.stringify(state));}
+function saveState(){try{localStorage.setItem(LS,JSON.stringify(state));}catch(e){console.warn('localStorage indisponible',e);}}
 function loadState(){try{return JSON.parse(localStorage.getItem(LS)||'null')}catch(e){return null}}
 function theme(){return trades[state.trade]||trades.autre;}
 function applyTheme(){
@@ -1386,7 +1392,16 @@ document.body.appendChild(d);setTimeout(()=>d.remove(),2400);
 }
 
 /* ── BOOT ── */
+function safeRender(){
+try{
 if(!checkValidationMode()) render();
+}catch(e){
+console.error(‘DevisExpress init error:’, e);
+const root=document.getElementById(‘root’);
+if(root) root.innerHTML=`<div style="padding:28px;font-family:sans-serif;max-width:480px;margin:0 auto"> <div style="background:#fff3e0;border:1px solid #ffb74d;border-radius:16px;padding:20px"> <div style="font-size:18px;font-weight:800;color:#e65100;margin-bottom:10px">⚠️ Erreur de démarrage</div> <div style="font-size:13px;color:#bf360c;margin-bottom:12px">${String(e.message||e).replace(/</g,'&lt;')}</div> <pre style="font-size:11px;color:#666;overflow:auto;background:#fff;padding:10px;border-radius:8px;max-height:200px">${String(e.stack||'').replace(/</g,'&lt;').slice(0,1000)}</pre> <button onclick="localStorage.clear();location.reload()" style="margin-top:12px;padding:10px 18px;background:#0D47A1;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer"> Réinitialiser et réessayer </button> </div> </div>`;
+}
+}
+safeRender();
 
 })();
 </script>
