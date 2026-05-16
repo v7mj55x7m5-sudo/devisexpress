@@ -948,10 +948,12 @@ window.newQuote=function(){
 };
 function quotePage(){
   ensureDraft();const d=state.draft;
-  shell('Nouveau devis',`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-    <h1 class="pageTitle" style="margin:0">${d.type==='devis'?'Nouveau devis':'Nouveau document'}</h1>
+  const isEdit=!!(d&&d._editingId);
+  shell(isEdit?'Modifier le devis':'Nouveau devis',`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+    <h1 class="pageTitle" style="margin:0">${isEdit?'Modifier le devis':'Nouveau devis'}</h1>
     <button class="btn small danger auto" onclick="confirmReset()">↺ Reset</button>
   </div>
+  ${isEdit?`<div class="alert" style="background:#fff3e0;border:1px solid #ffb74d;border-radius:12px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:#e65100;display:flex;align-items:center;gap:8px"><span>✏️</span><span>Vous modifiez <b>${esc(d.number||'')}</b> — les modifications remplaceront le devis d'origine.</span></div>`:''}
   <div class="stepper">
     <div class="step ${d.step===1?'active':''}">1 Client</div>
     <div class="step ${d.step===2?'active':''}">2 Prestations</div>
@@ -997,7 +999,7 @@ function quoteStepHTML(d){
     ${pdfPreviewHTML()}
     <div class="toolbar" style="margin-top:14px">
       <button class="btn ghost" onclick="goStep(2)">← Modifier</button>
-      <button class="btn" onclick="finalizeQuote()">✓ Générer le devis</button>
+      <button class="btn" onclick="finalizeQuote()">${state.draft&&state.draft._editingId?'✅ Enregistrer les modifications':'✓ Générer le devis'}</button>
     </div>
     <button class="btn orange noPrint" onclick="downloadDraftPdf()" style="margin-top:10px">⬇ Télécharger aperçu PDF</button>
   </div>`;
@@ -1111,7 +1113,47 @@ function createFromDraft(status='En attente'){
     state.clients.push({...q.client,id:uid()});
   state.draft=null;saveState();return q;
 }
-window.finalizeQuote=()=>{const q=createFromDraft();successPage(q);};
+window.finalizeQuote=()=>{
+  // Mode édition : mettre à jour le devis existant
+  if(state.draft&&state.draft._editingId){
+    const editId=state.draft._editingId;
+    const idx=state.quotes.findIndex(x=>x.id===editId);
+    if(idx>=0){
+      const original=state.quotes[idx];
+      const t=calcTotals(state.draft);
+      state.quotes[idx]={
+        ...original,
+        title:state.draft.title,
+        description:state.draft.description,
+        client:state.draft.client,
+        items:state.draft.items,
+        observations:state.draft.observations||'',
+        totalHT:t.ht,totalTVA:t.tva,totalTTC:t.ttc,
+        // On conserve le numéro, la date, le statut et le type d'origine
+      };
+      state.draft=null;
+      saveState();
+      toast('✅ Devis mis à jour — '+state.quotes[idx].number);
+      openQuote(editId);
+    }
+  } else {
+    const q=createFromDraft();
+    successPage(q);
+  }
+};
+// Charger un devis existant en mode édition
+window.editQuote=function(id){
+  const q=state.quotes.find(x=>x.id===id);if(!q)return;
+  // Copie profonde du devis dans le draft, on démarre à l'étape 2 (prestations)
+  state.draft={
+    ...JSON.parse(JSON.stringify(q)),
+    _editingId:id,
+    step:2
+  };
+  state.activeTab='quote';
+  render();
+  toast('Mode modification — ajoutez ou retirez des prestations');
+};
 function successPage(q){
   shell('Devis créé',`<div class="successView">
     <div class="check">✓</div>
@@ -1138,6 +1180,9 @@ function quoteDetailHTML(q){
     <button class="btn" onclick="downloadPdf('${q.id}')">⬇ PDF</button>
     <button class="btn ghost" onclick="shareQuote('${q.id}')">📤 Partager</button>
     <button class="btn ghost" onclick="openLienModal('${q.id}')">🔗 Lien client</button>
+  </div>
+  <div class="toolbar noPrint">
+    <button class="btn ghost" style="border-color:var(--primary);color:var(--primary)" onclick="editQuote('${q.id}')">✏️ Modifier le devis</button>
   </div>
   ${!isInv?`<div class="toolbar noPrint">
     <button class="btn ghost" onclick="markQuote('${q.id}','Accepté')">✓ Accepté</button>
