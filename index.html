@@ -272,6 +272,23 @@ textarea.field{min-height:88px;resize:vertical}
 .insightBody{font-size:12px;color:#bf360c;line-height:1.55}
 
 @media(print){.topbar,.bottomNav,.noPrint{display:none!important}.app{box-shadow:none;max-width:none}.content{padding:0;background:#fff}.pdfPreview{border:0;box-shadow:none}}
+
+/* ── DESKTOP RESPONSIVE ── */
+.deskNav{display:none}
+.deskNavItem{display:flex;align-items:center;gap:12px;padding:11px 20px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .12s;border-left:3px solid transparent;white-space:nowrap}
+.deskNavItem:hover{background:#f0f5fb;color:var(--primary)}
+.deskNavItem.active{background:#edf5ff;color:var(--primary);border-left-color:var(--primary)}
+.deskNavIcon{font-size:20px;width:26px;text-align:center}
+.deskNavSep{height:1px;background:var(--line);margin:6px 14px}
+@media(min-width:700px){
+  .app{max-width:960px;display:grid!important;grid-template-columns:210px 1fr;grid-template-rows:64px 1fr;min-height:100vh;margin:0 auto;border-radius:0}
+  .topbar{grid-column:1/-1;grid-row:1;border-radius:0}
+  .deskNav{display:flex!important;flex-direction:column;background:var(--card);border-right:1px solid var(--line);grid-column:1;grid-row:2;overflow-y:auto;max-height:calc(100vh - 64px);position:sticky;top:64px}
+  .content{grid-column:2;grid-row:2;padding:28px 32px 28px;max-height:calc(100vh - 64px);overflow-y:auto}
+  .bottomNav{display:none!important}
+  .kanban{grid-template-columns:repeat(4,1fr)}
+  .dashGrid{grid-template-columns:repeat(4,1fr)}
+}
 </style>
 </head>
 <body>
@@ -380,12 +397,26 @@ if(!state.quotes)state.quotes=[];
 if(!state.clients)state.clients=[];
 if(!state.settings)state.settings={vat:10,validity:30,mentions:''};
 Object.keys(trades).forEach(k=>{if(!state.servicesByTrade[k])state.servicesByTrade[k]=catalogue(k);});
+// Restaure le métier personnalisé après rechargement
+if(state.customTradeLabel&&state.trade==='autre'){
+  trades.autre.label=state.customTradeLabel;
+  if(state.customTradeIcon)trades.autre.icon=state.customTradeIcon;
+}
 // Expose state globally so inline onclick handlers can access it
 window.state=state;
 
 function saveState(){try{localStorage.setItem(LS,JSON.stringify(state));}catch(e){console.warn('localStorage indisponible',e);}}
 function loadState(){try{return JSON.parse(localStorage.getItem(LS)||'null')}catch(e){return null}}
-function theme(){return trades[state.trade]||trades.autre;}
+function theme(){
+  const t={...trades[state.trade]||trades.autre};
+  // Applique le métier personnalisé s'il est défini
+  if(state.trade==='autre'&&state.customTradeLabel){
+    t.label=state.customTradeLabel;
+    t.subtitle=state.customTradeLabel; // Affiche le vrai métier dans le PDF
+  }
+  if(state.trade==='autre'&&state.customTradeIcon){t.icon=state.customTradeIcon;}
+  return t;
+}
 function applyTheme(){
   const t=theme();
   document.documentElement.style.setProperty('--primary',t.primary);
@@ -433,10 +464,10 @@ function genRelanceMsg(q,canal){
 /* ── CRM : PIPELINE ── */
 function pipelineHTML(){
   const stages=[
-    {key:'Brouillon',    label:'Prospection', color:'#607D8B'},
-    {key:'En attente',   label:'Devis envoyé',color:'#0D47A1'},
-    {key:'Accepté',      label:'Accepté',     color:'#2E7D32'},
-    {key:'Payé',         label:'Payé ✓',      color:'#15803d'},
+    {key:'Brouillon',  label:'Prospection',  color:'#607D8B', amtColor:'#607D8B'},
+    {key:'En attente', label:'Devis envoyé', color:'#E65100', amtColor:'#F57C00'},
+    {key:'Accepté',    label:'Accepté',      color:'#2E7D32', amtColor:'#2E7D32'},
+    {key:'Payé',       label:'Payé ✓',       color:'#15803d', amtColor:'#15803d'},
   ];
   return stages.map(s=>{
     const cards=state.quotes.filter(q=>q.status===s.key);
@@ -445,12 +476,14 @@ function pipelineHTML(){
       <div class="kCard" onclick="openQuote('${q.id}')">
         <div class="kCardName">${esc(q.title||q.number||'—')}</div>
         <div class="kCardClient">${esc(q.client?.name||'—')}</div>
-        <div class="kCardAmount">${money(q.totalTTC)}</div>
+        <div style="font-size:13px;font-weight:900;color:${s.amtColor};margin-top:6px">${money(q.totalTTC)}</div>
       </div>`).join(''):`<div style="font-size:12px;color:#999;text-align:center;padding:12px">Aucun devis</div>`;
+    const prospectBtn=s.key==='Brouillon'?`<button class="btn small ghost" style="width:100%;margin-top:8px;font-size:11px" onclick="newQuote()">＋ Ajouter un prospect</button>`:'';
     return `<div class="kCol">
-      <div class="kHead"><span>${s.label}</span><span class="kCount">${cards.length}</span></div>
+      <div class="kHead" style="border-top:3px solid ${s.color};margin:-12px -12px 10px;padding:10px 12px 0;border-radius:0"><span>${s.label}</span><span class="kCount" style="background:${s.color}">${cards.length}</span></div>
       ${cardHtml}
-      ${total>0?`<div class="kTotal">${money(total)}</div>`:''}
+      ${prospectBtn}
+      ${total>0?`<div class="kTotal" style="color:${s.amtColor};font-weight:700">${money(total)}</div>`:''}
     </div>`;
   }).join('');
 }
@@ -594,8 +627,14 @@ window.partagerLienWA=function(id,lien){
 
 function genValidationLink(q){
   const c=state.company;
-  // Payload minimal avec clés courtes — sans les lignes détaillées
-  // Résultat : URL ~5x plus courte (lisible dans WhatsApp)
+  // Totaux par catégorie : compact ET informatif (client voit le détail groupé)
+  const catSums={};
+  (q.items||[]).forEach(it=>{
+    const cat=(it.category||'PRESTATIONS').slice(0,18);
+    const ht=(it.qty||1)*(it.price||0);
+    const ttc=ht*(1+Number(state.settings?.vat||10)/100);
+    catSums[cat]=(catSums[cat]||0)+ttc;
+  });
   const p={
     r:q.number,
     ti:(q.title||'').slice(0,50),
@@ -604,9 +643,9 @@ function genValidationLink(q){
     am:theme().label,
     at:(c.phone||'').slice(0,15),
     m:Math.round((q.totalTTC||0)*100)/100,
-    dv:q.date?new Date(new Date(q.date).getTime()+(q.validity||30)*86400000).toISOString().slice(0,10):''
+    dv:q.date?new Date(new Date(q.date).getTime()+(q.validity||30)*86400000).toISOString().slice(0,10):'',
+    cs:Object.entries(catSums).map(([c,m])=>({c,m:Math.round(m*100)/100}))
   };
-  // btoa sur UTF-8 propre (sans double-encodeURIComponent)
   const encoded=btoa(unescape(encodeURIComponent(JSON.stringify(p))));
   return window.location.origin+window.location.pathname+'?validate='+encoded;
 }
@@ -652,11 +691,14 @@ function vpRender(){
   if(validite){
     document.getElementById('vp-validity').textContent='Valide jusqu\'au '+new Date(validite).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
   }
-  // Lignes si disponibles (ancien format), sinon message résumé
-  const lines=d.lignes||[];
-  document.getElementById('vp-lines').innerHTML=lines.length
-    ?lines.map(l=>`<div class="vpLine"><span class="vpLineLabel">${esc(l.description||'')}</span><span class="vpLineAmt">${money(l.montant||0)}</span></div>`).join('')
-    :`<div style="padding:10px 0;font-size:13px;color:#888;text-align:center;font-style:italic">Consultez le PDF reçu pour le détail des prestations</div>`;
+  // Lignes : catégorie sums (nouveau format) > noms (format intermédiaire) > message générique
+  const catSums=d.cs||[];
+  const names=d.ls||[];
+  document.getElementById('vp-lines').innerHTML=catSums.length
+    ?catSums.map(e=>`<div class="vpLine"><span class="vpLineLabel">${esc(e.c||'—')}</span><span class="vpLineAmt">${money(e.m||0)}</span></div>`).join('')
+    :names.length
+      ?`<div style="padding:10px 0 4px"><div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:8px">Prestations incluses</div>`+names.map(n=>`<div class="vpLine" style="justify-content:flex-start;gap:8px"><span style="color:#0D47A1;font-size:14px">✓</span><span class="vpLineLabel">${esc(n)}</span></div>`).join('')+'</div>'
+      :`<div style="padding:12px 0;font-size:13px;color:#888;text-align:center;font-style:italic">Consultez le PDF reçu pour le détail des prestations</div>`;
 }
 window.vpAccepter=function(){
   document.getElementById('vp-devis-view').style.display='none';
@@ -818,15 +860,18 @@ function renderOnboarding(){
 function shell(title,body){
   const relCount=getRelancesUrgentes().length;
   const badge=relCount>0?`<span class="navBadge">${relCount}</span>`:'';
+  const navItems=[['home','🏠','Accueil'],['quote','➕','Nouveau devis'],['clients','👥','Clients'],['track','📊','Suivi'],['profile','👤','Profil']];
+  const deskNavHTML=navItems.map(([tab,icon,label])=>`<div class="deskNavItem ${state.activeTab===tab?'active':''}" onclick="state.activeTab='${tab}';render()"><span class="deskNavIcon">${icon}</span>${label}${tab==='track'&&relCount>0?`<span class="navBadge" style="position:static;transform:none;margin-left:auto">${relCount}</span>`:''}</div>`).join('<div class="deskNavSep"></div>');
   setRoot(`<div class="app">
     <header class="topbar">
       <button class="iconBtn" onclick="openQuickMenu()">☰</button>
       <b>${title}</b>
       <button class="iconBtn" onclick="state.activeTab='profile';render()">⚙</button>
     </header>
+    <nav class="deskNav noPrint">${deskNavHTML}</nav>
     <main class="content">${body}</main>
     <nav class="bottomNav noPrint">
-      ${[['home','🏠','Accueil'],['quote','➕','Devis'],['clients','👥','Clients'],['track','📊','Suivi'],['profile','👤','Profil']].map(x=>`<button data-tab="${x[0]}" class="navItem ${state.activeTab===x[0]?'active':''}">${x[0]==='track'?badge:''}<span>${x[1]}</span>${x[2]}</button>`).join('')}
+      ${navItems.map(([tab,icon,label])=>`<button data-tab="${tab}" class="navItem ${state.activeTab===tab?'active':''}">${tab==='track'?badge:''}<span>${icon}</span>${label}</button>`).join('')}
     </nav>
   </div>`);
 }
@@ -1010,7 +1055,13 @@ window.goStep=n=>{state.draft.step=n;render();};
 window.saveDraftOnly=()=>{saveState();toast('Brouillon enregistré ✓');};
 window.addService=id=>{
   const s=(state.servicesByTrade[state.trade]||[]).find(x=>x.id===id);
-  if(s){state.draft.items.push({...s,id:uid(),qty:1});saveState();render();}
+  if(s){
+    state.draft.items.push({...s,id:uid(),qty:1});
+    saveState();render();
+    // Toast APRÈS render() pour qu'il reste visible
+    const n=state.draft.items.length;
+    toast('✅ "'+s.name.slice(0,28)+'" ajouté · '+n+' prestation'+(n>1?'s':'')+' au total');
+  }
 };
 window.changeQty=(i,n)=>{
   state.draft.items[i].qty=Math.max(1,Number(state.draft.items[i].qty||1)+n);
@@ -1208,11 +1259,19 @@ function trackPage(){
 /* ── PROFILE ── */
 function profilePage(){
   const c=state.company;
+  const isCustom=state.trade==='autre';
   shell('Profil',`<h1 class="pageTitle">Profil</h1>
     <p class="sub">Toutes ces informations sont optionnelles.</p>
     <div class="card" style="padding:14px">
       <div class="label" style="margin-top:0">Métier principal</div>
       <select class="field" id="tradeSelect">${Object.entries(trades).map(([k,v])=>`<option value="${k}" ${state.trade===k?'selected':''}>${v.label}</option>`).join('')}</select>
+      <div id="customTradeBox" style="display:${isCustom?'block':'none'};margin-top:9px">
+        <input class="field" id="customTradeInput" placeholder="Nommez votre métier (ex: Manicure, photographe…)" value="${esc(state.customTradeLabel||'')}">
+        <div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:5px">
+          ${['✂️','💅','💄','🎨','📸','🎭','🎵','🎓','🍕','🍰','🌿','🧘','🐕','🔑','🏠','🚗','💻','📱','⚖️','🏥','🎯','🧹','🌸','💎','👗','🚚','🔬','🍷','⚙️','🌟','💼'].map(e=>`<button onclick="document.getElementById('customEmojiSel').textContent='${e}'" style="font-size:20px;background:transparent;border:1px solid var(--line);border-radius:8px;padding:2px;cursor:pointer;width:32px;height:32px">${e}</button>`).join('')}
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">Icône actuelle : <span id="customEmojiSel" style="font-size:18px">${state.customTradeIcon||'⚙️'}</span></div>
+      </div>
       <div class="label">Entreprise</div>
       <input class="field prof" data-k="name" placeholder="Nom entreprise" value="${esc(c.name)}">
       <input class="field prof" data-k="firstName" placeholder="Prénom" value="${esc(c.firstName)}" style="margin-top:9px">
@@ -1240,14 +1299,31 @@ function profilePage(){
           <button class="btn small danger auto" onclick="deleteCatalogItem('${s.id}')">🗑</button>
         </div>
       </div>`).join('')||'<div class="empty">Aucune prestation dans le catalogue.</div>'}
+    </div>
+    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--line)">
+      <h3 style="margin:0 0 10px;font-size:15px;color:var(--danger)">Zone de danger</h3>
+      <button class="btn danger" onclick="if(confirm('Réinitialiser complètement l\\'application ? Toutes vos données seront perdues.')){localStorage.clear();location.reload();}">
+        🗑 Réinitialiser l'application (retour au départ)
+      </button>
     </div>`);
-  document.getElementById('tradeSelect').onchange=e=>{state.trade=e.target.value;saveState();render();};
+  document.getElementById('tradeSelect').onchange=e=>{
+    state.trade=e.target.value;
+    const box=document.getElementById('customTradeBox');
+    if(box)box.style.display=e.target.value==='autre'?'block':'none';
+    saveState();
+  };
 }
 window.saveProfile=function(){
   document.querySelectorAll('.prof').forEach(i=>state.company[i.dataset.k]=i.value);
   state.settings.vat=Number(document.getElementById('vat').value)||0;
   state.settings.validity=Number(document.getElementById('validity').value)||30;
   state.settings.mentions=document.getElementById('mentions').value;
+  // Sauvegarde du métier personnalisé
+  if(state.trade==='autre'){
+    const cl=(document.getElementById('customTradeInput')?.value||'').trim();
+    const ce=document.getElementById('customEmojiSel')?.textContent||'⚙️';
+    if(cl){state.customTradeLabel=cl;state.customTradeIcon=ce;trades.autre.label=cl;trades.autre.icon=ce;}
+  }
   saveState();toast('Profil enregistré ✓');render();
 };
 window.deleteCatalogItem=function(id){
@@ -1312,14 +1388,38 @@ window.openServiceModalById=function(id){
 
 /* ── AUTRES MODALS ── */
 function openTradeModal(){
-  openModal(mHtml('Votre métier',`<p class="sub" style="margin-bottom:12px">Entrez votre activité ou spécialité</p>
-    <input id="customTradeName" class="field" placeholder="Ex : Serrurier, décorateur, coach…">
-    <div class="toolbar" style="margin-top:12px">
+  const emojis=['✂️','💅','💄','🎨','📸','🎭','🎵','🎓','🍕','🍰','🌿','🧘','🐕','🔑','🏠','🚗','💻','📱','⚖️','🏥','🏋️','🎯','🧹','🌸','💎','👗','🎪','🚚','🔬','🍷'];
+  openModal(mHtml('Votre métier',`
+    <p class="sub" style="margin-bottom:12px">Entrez le nom de votre activité et choisissez une icône.</p>
+    <input id="customTradeName" class="field" placeholder="Ex : Manicure, coach, décorateur…">
+    <div class="label" style="margin-top:12px">Icône (optionnel)</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;padding:8px;background:#f8fbff;border:1px solid var(--line);border-radius:12px">
+      ${emojis.map(e=>`<button onclick="selectTradeEmoji('${e}',this)" style="font-size:22px;background:transparent;border:2px solid transparent;border-radius:8px;padding:3px;cursor:pointer;width:38px;height:38px;line-height:1">${e}</button>`).join('')}
+    </div>
+    <div style="margin-top:8px;font-size:13px;color:var(--muted)">Icône sélectionnée : <span id="selectedEmoji" style="font-size:18px">⚙️</span></div>
+    <div class="toolbar" style="margin-top:14px">
       <button class="btn ghost" onclick="closeModal()">Annuler</button>
       <button class="btn" onclick="addCustomTrade()">Utiliser ce métier</button>
     </div>`));
 }
-window.addCustomTrade=function(){const n=val('customTradeName')||'Autre métier';trades.autre.label=n;state.trade='autre';closeModal();renderOnboarding();};
+window.selectTradeEmoji=function(e,btn){
+  document.getElementById('selectedEmoji').textContent=e;
+  document.querySelectorAll('#modal button[onclick^="selectTradeEmoji"]').forEach(b=>b.style.borderColor='transparent');
+  if(btn)btn.style.borderColor='var(--primary)';
+};
+window.addCustomTrade=function(){
+  const n=(val('customTradeName')||'Mon métier').trim();
+  const e=document.getElementById('selectedEmoji')?.textContent||'⚙️';
+  // Persiste dans state (survit au rechargement)
+  state.customTradeLabel=n;
+  state.customTradeIcon=e;
+  state.trade='autre';
+  trades.autre.label=n;
+  trades.autre.icon=e;
+  saveState();
+  closeModal();
+  renderOnboarding();
+};
 function openClientModal(){
   openModal(mHtml('Ajouter un client',`
     <input class="field" id="clName" placeholder="Nom du client *">
@@ -1357,7 +1457,8 @@ window.openQuickMenu=function(){
     <button class="btn ghost" onclick="closeModal();demoQuote()">🎯 Charger une démo</button>
     <button class="btn ghost" onclick="closeModal();state.activeTab='track';state.trackView='relances';render()">🔔 Voir les relances</button>
     <button class="btn ghost" onclick="closeModal();exportData()">⬇ Exporter mes données</button>
-    <button class="btn danger" onclick="closeModal()">Fermer</button>
+    <button class="btn danger" onclick="closeModal();if(confirm('Réinitialiser et tout effacer ?')){localStorage.clear();location.reload();}">🗑 Réinitialiser l'app</button>
+    <button class="btn ghost" onclick="closeModal()">Fermer</button>
   </div>`));
 };
 
